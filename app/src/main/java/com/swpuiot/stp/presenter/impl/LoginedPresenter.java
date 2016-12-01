@@ -4,35 +4,34 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.swpuiot.stp.base.IView;
+
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
-import com.swpuiot.stp.interfaces.IMainView;
+import com.swpuiot.stp.interfaces.ILoginedView;
 import com.swpuiot.stp.presenter.IPresenter;
 
 import javax.inject.Inject;
 
-
 /**
- * Created by wuhaojie on 2016/7/7 11:28.
+ * Created by DELL on 2016/11/29.
  */
-public class MainPresenter implements IPresenter {
-
-    public static final String TAG = "MainPresenter";
+public class LoginedPresenter implements IPresenter {
+    public static final String TAG = "LoginedActivity";
     private Context mContext;
-    private IMainView mIMainView;
+    private ILoginedView mLoginedView;
 
     @Inject
-    public MainPresenter(@ContextLifeCycle("Activity") Context context) {
+    public LoginedPresenter(@ContextLifeCycle("Activity")Context context){
         mContext = context;
+
     }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mIMainView.showSnackBarMsg("Hello MVP!");
+        mLoginedView.showSnackBarMsg("登录成功");
     }
 
     @Override
     public void onResume() {
+
     }
 
     @Override
@@ -47,6 +46,7 @@ public class MainPresenter implements IPresenter {
 
     @Override
     public void onStop() {
+
     }
 
     @Override
@@ -56,10 +56,7 @@ public class MainPresenter implements IPresenter {
 
     @Override
     public void attachView(IView v) {
-        mIMainView = (IMainView) v;
+        mLoginedView = (ILoginedView) v;
     }
 
-    public void btnLoginOnClick() {
-        mIMainView.startLoginedActivity();
-    }
 }

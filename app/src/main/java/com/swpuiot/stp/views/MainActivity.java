@@ -1,8 +1,13 @@
 package com.swpuiot.stp.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
 
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
@@ -25,7 +30,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     MainPresenter mMainPresenter;
     @BindView(R.id.cl_main)
     CoordinatorLayout mClMain;
-
+    private Button btn_login;
 
     @Override
     public int getLayoutResID() {
@@ -35,6 +40,13 @@ public class MainActivity extends BaseActivity implements IMainView {
     @Override
     public void initViews(Bundle savedInstanceState) {
         mMainPresenter.onCreate(savedInstanceState);
+        btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainPresenter.btnLoginOnClick();
+            }
+        });
     }
 
     @Override
@@ -64,4 +76,17 @@ public class MainActivity extends BaseActivity implements IMainView {
         mMainPresenter.attachView(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public void startLoginedActivity() {
+        Intent intent = new Intent(this,LoginedActivity.class);
+        startActivity(intent);
+    }
 }
