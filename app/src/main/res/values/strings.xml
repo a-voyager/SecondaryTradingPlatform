@@ -7,4 +7,5 @@
     <string name="btn_register">注册</string>
     <string name="title_activity_logined">LoginedActivity</string>
     <string name="action_notification">Notification</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

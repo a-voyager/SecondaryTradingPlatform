@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     @BindView(R.id.cl_main)
     CoordinatorLayout mClMain;
     private Button btn_login;
+    private Button btn_register;
 
     @Override
     public int getLayoutResID() {
@@ -45,6 +46,14 @@ public class MainActivity extends BaseActivity implements IMainView {
             @Override
             public void onClick(View view) {
                 mMainPresenter.btnLoginOnClick();
+            }
+        });
+
+        btn_register = (Button) findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainPresenter.btnRegisterOnClick();
             }
         });
     }
@@ -86,7 +95,13 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void startLoginedActivity() {
-        Intent intent = new Intent(this,LoginedActivity.class);
+        Intent intent = new Intent(this, LoginedActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startRegisterActivity() {
+        Intent intent = new Intent(this,RegisterActivity.class);
         startActivity(intent);
     }
 }

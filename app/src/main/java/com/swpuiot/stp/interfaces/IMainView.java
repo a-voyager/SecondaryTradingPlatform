@@ -10,4 +10,5 @@ import com.swpuiot.stp.base.IView;
  */
 public interface IMainView extends IView {
     public void startLoginedActivity();
+    public void startRegisterActivity();
 }

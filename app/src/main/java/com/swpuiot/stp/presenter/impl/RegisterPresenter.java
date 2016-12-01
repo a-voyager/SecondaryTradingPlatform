@@ -5,34 +5,30 @@ import android.os.Bundle;
 
 import com.swpuiot.stp.base.IView;
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
-import com.swpuiot.stp.interfaces.IMainView;
+import com.swpuiot.stp.interfaces.IRegisterView;
 import com.swpuiot.stp.presenter.IPresenter;
 
 import javax.inject.Inject;
 
-
 /**
- * Created by wuhaojie on 2016/7/7 11:28.
+ * Created by DELL on 2016/12/1.
  */
-public class MainPresenter implements IPresenter {
+public class RegisterPresenter implements IPresenter {
 
-    public static final String TAG = "MainPresenter";
-    private Context mContext;
-    private IMainView mIMainView;
-
+    Context mContext;
+    IRegisterView mIRegisterView;
     @Inject
-    public MainPresenter(@ContextLifeCycle("Activity") Context context) {
+    public RegisterPresenter(@ContextLifeCycle("Activity") Context context) {
         mContext = context;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mIMainView.showSnackBarMsg("Hello MVP!");
     }
 
     @Override
     public void onResume() {
+
     }
 
     @Override
@@ -47,6 +43,7 @@ public class MainPresenter implements IPresenter {
 
     @Override
     public void onStop() {
+
     }
 
     @Override
@@ -56,14 +53,6 @@ public class MainPresenter implements IPresenter {
 
     @Override
     public void attachView(IView v) {
-        mIMainView = (IMainView) v;
-    }
-
-    public void btnLoginOnClick() {
-        mIMainView.startLoginedActivity();
-    }
-
-    public void btnRegisterOnClick() {
-        mIMainView.startRegisterActivity();
+        mIRegisterView = (IRegisterView) v;
     }
 }
