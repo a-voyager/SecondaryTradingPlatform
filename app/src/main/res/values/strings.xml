@@ -35,4 +35,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_find_password">FindPasswordActivity</string>
+
+    <!--找回密码中的String-->
+    <string name="findpassword_title">找回密码</string>
 </resources>
