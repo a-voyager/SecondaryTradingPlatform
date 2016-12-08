@@ -1,13 +1,19 @@
 package com.swpuiot.stp.views;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
+
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ThemedSpinnerAdapter;
+import android.widget.ImageButton;
+
 
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.adapter.LoginedAdapter;
@@ -24,16 +30,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class LoginedActivity extends BaseActivity implements ILoginedView{
+public class LoginedActivity extends BaseActivity implements ILoginedView {
 
     @Inject
     LoginedPresenter mLoginedPresenter;
 
     @BindView(R.id.cl_logined)
     CoordinatorLayout mClLogined;
-    private GridView gridview;
-    private LoginedAdapter adapter;
-
+    private Button showmain;
+    private Button loginToMy;
+    private Button shoppingcar;
 
     @Override
     protected void initializePresenter() {
@@ -59,26 +65,67 @@ public class LoginedActivity extends BaseActivity implements ILoginedView{
     @Override
     public void initViews(Bundle savedInstanceState) {
         mLoginedPresenter.onCreate(savedInstanceState);
-        gridview = (GridView) findViewById(R.id.gv_logined);
-        adapter = new LoginedAdapter(this);
-        gridview.setAdapter(adapter);
+        showmain = (Button) findViewById(R.id.btn_main);
+        shoppingcar = (Button) findViewById(R.id.shopping_car);
+
+        shoppingcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLoginedPresenter.btnShoppingcarOnClick();
+            }
+        });
+
+        loginToMy = (Button) findViewById(R.id.btn_loginToMy);
+        loginToMy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLoginedPresenter.btnLoginToMyOnClick();
+            }
+        });
+
+        showmain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLoginedPresenter.btnMainOnClick();
+            }
+        });
     }
 
     @Override
     public void showSnackBarMsg(@StringRes int msg) {
-        SnackBarUtils.show(mClLogined,msg);
+        SnackBarUtils.show(mClLogined, msg);
     }
 
     @Override
     public void showSnackBarMsg(String msg) {
-        SnackBarUtils.show(mClLogined,msg);
+        SnackBarUtils.show(mClLogined, msg);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_logined,menu);
+        inflater.inflate(R.menu.menu_logined, menu);
         return true;
 
+    }
+
+    @Override
+    public void startLoginToMyActivity() {
+        Intent intent = new Intent(this, MyActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void gotoShoppingCarFragment() {
+        ShoppingFragment fragment = new ShoppingFragment();
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
+    }
+
+    @Override
+    public void showMain() {
+        MainFragment fragment = new MainFragment();
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 }

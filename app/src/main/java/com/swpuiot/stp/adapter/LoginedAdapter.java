@@ -33,6 +33,8 @@ public class LoginedAdapter extends BaseAdapter {
     {
         list.add(new LoginedItem("天猫", R.drawable.zhugeliang));
         list.add(new LoginedItem("聚划算",R.drawable.huangyueying));
+        list.add(new LoginedItem("天猫国际",R.drawable.huangyueying));
+        list.add(new LoginedItem("外卖",R.drawable.huangyueying));
     }
 
     @Override

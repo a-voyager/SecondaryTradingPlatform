@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.swpuiot.stp.views.MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="test"
+            android:textSize="@dimen/textsize_small" />
+
+        <GridView
+            android:id="@+id/gv_logined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="@dimen/columnWidth"
+            android:horizontalSpacing="@dimen/horizontalSpacing"
+            android:numColumns="auto_fit"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:stretchMode="columnWidth">
+
+        </GridView>
+
+    </LinearLayout>
+</FrameLayout>

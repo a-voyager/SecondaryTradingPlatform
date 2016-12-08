@@ -55,4 +55,10 @@ public class RegisterPresenter implements IPresenter {
     public void attachView(IView v) {
         mIRegisterView = (IRegisterView) v;
     }
+    public void btnRegisterToLoginOnClick() {
+        mIRegisterView.startRegisterToLoginedActivity();
+    }
+    public  void tvSurePassword(){
+        mIRegisterView.surePassword();
+    }
 }

@@ -8,8 +8,10 @@ import com.swpuiot.stp.injector.module.ActivityModule;
 import com.swpuiot.stp.injector.scrope.ActivityScope;
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
 import com.swpuiot.stp.presenter.impl.LoginedPresenter;
+import com.swpuiot.stp.views.FindPasswordActivity;
 import com.swpuiot.stp.views.LoginedActivity;
 import com.swpuiot.stp.views.MainActivity;
+import com.swpuiot.stp.views.MyActivity;
 import com.swpuiot.stp.views.RegisterActivity;
 
 import dagger.Component;
@@ -25,6 +27,8 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
     void inject(LoginedActivity activity);
     void inject(RegisterActivity activity);
+    void inject(MyActivity activity);
+    void inject(FindPasswordActivity activity);
     Activity activity();
 
     @ContextLifeCycle("Activity")

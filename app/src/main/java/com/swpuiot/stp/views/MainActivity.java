@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     CoordinatorLayout mClMain;
     private Button btn_login;
     private Button btn_register;
+    private Button btn_fingpassword;
 
     @Override
     public int getLayoutResID() {
@@ -42,6 +43,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     public void initViews(Bundle savedInstanceState) {
         mMainPresenter.onCreate(savedInstanceState);
         btn_login = (Button) findViewById(R.id.btn_login);
+        btn_fingpassword = (Button) findViewById(R.id.btn_findpassword);
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +59,15 @@ public class MainActivity extends BaseActivity implements IMainView {
                 mMainPresenter.btnRegisterOnClick();
             }
         });
+
+        btn_fingpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainPresenter.btnFindPasswordOnClick();
+            }
+        });
     }
+
 
     @Override
     public void showSnackBarMsg(@StringRes int msg) {
@@ -97,11 +108,18 @@ public class MainActivity extends BaseActivity implements IMainView {
     public void startLoginedActivity() {
         Intent intent = new Intent(this, LoginedActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
     public void startRegisterActivity() {
-        Intent intent = new Intent(this,RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startFindPasswordActicity() {
+        Intent intent = new Intent(this, FindPasswordActivity.class);
         startActivity(intent);
     }
 }

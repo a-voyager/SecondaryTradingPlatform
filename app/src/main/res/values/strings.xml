@@ -1,11 +1,38 @@
 <resources>
-    <string name="app_name">SecondaryTradingPlatform</string>
+    <string name="app_name">二手市场</string>
     <string name="action_settings">Settings</string>
+    <!-- 主界面的String -->
     <string name="et_login">用户名</string>
     <string name="et_password">密码</string>
     <string name="btn_login">登陆</string>
     <string name="btn_register">注册</string>
+    <!-- 活动名称 -->
     <string name="title_activity_logined">LoginedActivity</string>
     <string name="action_notification">Notification</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_my">MyActivity</string>
+    <!--注册界面的String -->
+    <string name="title_activity_register">注册</string>
+    <string name="btn_forgetpassword">\?忘记密码</string>
+    <string name="btn_mainToRegister">新用户注册</string>
+    <string name="et_register_username">请输入用户名</string>
+    <string name="et_register_password">请输入密码</string>
+    <string name="et_register_sure">请确认密码</string>
+    <string name="et_register_nickname">请输入昵称</string>
+    <string name="et_register_email">请输入邮箱</string>
+    <string name="et_register_checkcode">请输入验证码</string>
+    <string name="btn_register_newimage">看不清 换一张</string>
+    <string name="btn_register_register">注册</string>
+    <!-- 我的活动界面中的String-->
+    <string name="back_and_help">退款/售后</string>
+    <string name="shoppingcar">购物车</string>
+    <string name="order">订单</string>
+    <!--底部导航栏的String -->
+    <string name="community">社区</string>
+    <string name="myself">我的</string>
+    <string name="weitao">微淘</string>
+    <string name="main">首页</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_find_password">FindPasswordActivity</string>
 </resources>

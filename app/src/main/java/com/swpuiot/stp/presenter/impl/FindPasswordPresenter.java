@@ -3,32 +3,30 @@ package com.swpuiot.stp.presenter.impl;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.IView;
-
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
-import com.swpuiot.stp.interfaces.ILoginedView;
+import com.swpuiot.stp.interfaces.IFindPasswordView;
+import com.swpuiot.stp.interfaces.IMainView;
 import com.swpuiot.stp.presenter.IPresenter;
 
 import javax.inject.Inject;
 
 /**
- * Created by DELL on 2016/11/29.
+ * Created by DELL on 2016/12/8.
  */
-public class LoginedPresenter implements IPresenter {
-    public static final String TAG = "LoginedActivity";
+public class FindPasswordPresenter implements IPresenter {
+    public static final String TAG = "MainPresenter";
     private Context mContext;
-    private ILoginedView mILoginedView;
+    private IFindPasswordView mFindPasswordView;
 
     @Inject
-    public LoginedPresenter(@ContextLifeCycle("Activity") Context context) {
+    public FindPasswordPresenter(@ContextLifeCycle("Activity")Context context){
         mContext = context;
-
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mILoginedView.showSnackBarMsg("登录成功");
-        mILoginedView.showMain();
+
     }
 
     @Override
@@ -58,20 +56,6 @@ public class LoginedPresenter implements IPresenter {
 
     @Override
     public void attachView(IView v) {
-        mILoginedView = (ILoginedView) v;
+        mFindPasswordView = (IFindPasswordView) v;
     }
-
-    public void btnLoginToMyOnClick() {
-        mILoginedView.startLoginToMyActivity();
-    }
-
-    public void btnShoppingcarOnClick() {
-        mILoginedView.gotoShoppingCarFragment();
-    }
-
-    public void btnMainOnClick(){
-        mILoginedView.showMain();
-    }
-
 }
-
