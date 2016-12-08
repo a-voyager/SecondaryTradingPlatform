@@ -8,6 +8,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
@@ -24,12 +26,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class FindPasswordActivity extends BaseActivity implements IFindPasswordView{
+public class FindPasswordActivity extends BaseActivity implements IFindPasswordView {
 
     @Inject
     FindPasswordPresenter mFindPasswordPresenter;
     @BindView(R.id.cl_find_password)
     CoordinatorLayout mClMain;
+    private Button button;
+    private EditText username;
+    private EditText password;
+    private EditText email;
     @Override
     protected void initializePresenter() {
         mFindPasswordPresenter.attachView(this);
@@ -53,16 +59,25 @@ public class FindPasswordActivity extends BaseActivity implements IFindPasswordV
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+        username = (EditText) findViewById(R.id.et_username);
+        password = (EditText) findViewById(R.id.et_password);
+        email = (EditText) findViewById(R.id.et_email);
+        button = (Button) findViewById(R.id.btn_findpassword);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSnackBarMsg("success");
+            }
+        });
     }
 
     @Override
     public void showSnackBarMsg(@StringRes int msg) {
-        SnackBarUtils.show(mClMain,msg);
+        SnackBarUtils.show(mClMain, msg);
     }
 
     @Override
     public void showSnackBarMsg(String msg) {
-        SnackBarUtils.show(mClMain,msg);
+        SnackBarUtils.show(mClMain, msg);
     }
 }
