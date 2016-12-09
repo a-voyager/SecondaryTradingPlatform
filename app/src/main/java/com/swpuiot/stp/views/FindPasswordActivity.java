@@ -40,7 +40,6 @@ public class FindPasswordActivity extends BaseActivity implements IFindPasswordV
     CoordinatorLayout mClMain;
     private Button button;
     private EditText username;
-    private EditText password;
     private EditText email;
     private TextView tv_username_error;
     private TextView tv_email_error;
@@ -69,7 +68,6 @@ public class FindPasswordActivity extends BaseActivity implements IFindPasswordV
     @Override
     public void initViews(Bundle savedInstanceState) {
         username = (EditText) findViewById(R.id.et_username);
-        password = (EditText) findViewById(R.id.et_password);
         email = (EditText) findViewById(R.id.et_email);
         tv_email_error = (TextView) findViewById(R.id.tv_showemailerror);
         button = (Button) findViewById(R.id.btn_findpassword);
