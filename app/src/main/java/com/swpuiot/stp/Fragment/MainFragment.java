@@ -1,4 +1,4 @@
-package com.swpuiot.stp.views;
+package com.swpuiot.stp.Fragment;
 
 
 import android.content.Context;
