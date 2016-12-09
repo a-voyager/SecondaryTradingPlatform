@@ -58,4 +58,16 @@ public class FindPasswordPresenter implements IPresenter {
     public void attachView(IView v) {
         mFindPasswordView = (IFindPasswordView) v;
     }
+
+    public void findPasswordOnClick() {
+        mFindPasswordView.findPasswordStart();
+    }
+
+    public void hidetext() {
+        mFindPasswordView.hidetext();
+    }
+
+    public void hidenametext() {
+        mFindPasswordView.hideusertext();
+    }
 }
