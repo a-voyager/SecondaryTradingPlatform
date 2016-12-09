@@ -1,6 +1,7 @@
 package com.swpuiot.stp.views;
 
-import android.app.FragmentManager;
+
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
@@ -109,7 +110,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public void startLoginToMyActivity() {
         MyFragment fragment = new MyFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1,fragment).commit();
 //        Intent intent = new Intent(this, MyActivity.class);
 //        startActivity(intent);
@@ -118,14 +119,14 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public void gotoShoppingCarFragment() {
         ShoppingFragment fragment = new ShoppingFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
     public void showMain() {
         MainFragment fragment = new MainFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 }

@@ -12,12 +12,11 @@ import com.swpuiot.stp.R;
 /**
  * Created by DELL on 2016/12/9.
  */
-public class MyFragment extends Fragment {
+public class ImageFragment_1 extends Fragment {
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my,container,false);
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_viewpager_image_2,null);
         return view;
     }
 }
