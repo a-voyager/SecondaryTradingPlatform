@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,20 +31,22 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-        switch (position){
-            case 0:
-                return new ImageFragment_1();
-            case 1:
-                return new ImageFragment_1();
-            case 2:
-                return new ImageFragment_2();
-        }
-        return null;
+        Log.i("Adapter", "pos: "+position);
+//        switch (position){
+//            case 0:
+//                return new ImageFragment_1();
+//            case 1:
+//                return new ImageFragment_1();
+//            case 2:
+//                return new ImageFragment_2();
+//            case 3:
+//                return new ImageFragment_2();
+//        }
+        return new ImageFragment_1();
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

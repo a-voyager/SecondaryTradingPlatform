@@ -1,6 +1,7 @@
 package com.swpuiot.stp.views;
 
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
@@ -66,6 +67,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         showmain = (Button) findViewById(R.id.btn_main);
         shoppingcar = (Button) findViewById(R.id.shopping_car);
 
+
         shoppingcar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,9 +113,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     public void startLoginToMyActivity() {
         MyFragment fragment = new MyFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativelayout1,fragment).commit();
-//        Intent intent = new Intent(this, MyActivity.class);
-//        startActivity(intent);
+        fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
