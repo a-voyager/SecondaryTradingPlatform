@@ -33,11 +33,6 @@ public class ShoppingFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
 
