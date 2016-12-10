@@ -13,6 +13,7 @@ import com.swpuiot.stp.views.LoginedActivity;
 import com.swpuiot.stp.views.MainActivity;
 import com.swpuiot.stp.views.MyActivity;
 import com.swpuiot.stp.views.RegisterActivity;
+import com.swpuiot.stp.views.SettingActivity;
 
 import dagger.Component;
 
@@ -29,6 +30,7 @@ public interface ActivityComponent {
     void inject(RegisterActivity activity);
     void inject(MyActivity activity);
     void inject(FindPasswordActivity activity);
+    void inject(SettingActivity activity);
     Activity activity();
 
     @ContextLifeCycle("Activity")

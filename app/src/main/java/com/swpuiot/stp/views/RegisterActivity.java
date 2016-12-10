@@ -33,7 +33,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @Inject
     RegisterPresenter mRegisterPresenter;
     @BindView(R.id.cl_register)
-    CoordinatorLayout mClMain;
+    CoordinatorLayout mClRegister;
     private Button btnRegisterToLogin;
     private EditText register_username;
     private EditText register_password;
@@ -102,12 +102,12 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void showSnackBarMsg(@StringRes int msg) {
-        SnackBarUtils.show(mClMain, msg);
+        SnackBarUtils.show(mClRegister, msg);
     }
 
     @Override
     public void showSnackBarMsg(String msg) {
-        SnackBarUtils.show(mClMain, msg);
+        SnackBarUtils.show(mClRegister, msg);
     }
 
     @Override

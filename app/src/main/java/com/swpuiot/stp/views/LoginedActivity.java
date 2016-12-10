@@ -1,12 +1,14 @@
 package com.swpuiot.stp.views;
 
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -102,9 +104,21 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+
         inflater.inflate(R.menu.menu_logined, menu);
+
         return true;
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_setting:
+                mLoginedPresenter.itemLoginedSetting();
+
+        }
+        return true;
     }
 
     @Override
@@ -128,5 +142,11 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         MainFragment fragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
+    }
+    @Override
+    public void startLoginedMenuSetting(){
+        Intent intent=new Intent(this,SettingActivity.class);
+        startActivity(intent);
+
     }
 }

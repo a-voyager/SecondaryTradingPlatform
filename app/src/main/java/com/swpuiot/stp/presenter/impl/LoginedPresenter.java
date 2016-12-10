@@ -17,7 +17,7 @@ import javax.inject.Inject;
 public class LoginedPresenter implements IPresenter {
     public static final String TAG = "LoginedActivity";
     private Context mContext;
-    private ILoginedView mILoginedView;
+    private  ILoginedView mILoginedView;
 
     @Inject
     public LoginedPresenter(@ContextLifeCycle("Activity") Context context) {
@@ -71,6 +71,9 @@ public class LoginedPresenter implements IPresenter {
 
     public void btnMainOnClick(){
         mILoginedView.showMain();
+    }
+    public  void itemLoginedSetting(){
+        mILoginedView.startLoginedMenuSetting();
     }
 
 }

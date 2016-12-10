@@ -8,6 +8,7 @@ import com.swpuiot.stp.base.IView;
 public interface ILoginedView extends IView {
     void startLoginToMyActivity();
     void gotoShoppingCarFragment();
+    void startLoginedMenuSetting();
 
     void showMain();
 }
