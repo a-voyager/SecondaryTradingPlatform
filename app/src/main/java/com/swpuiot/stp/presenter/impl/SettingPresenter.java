@@ -57,4 +57,13 @@ public class SettingPresenter implements IPresenter {
     public void llSettingToUserInformationOnClick(){
         mISettingView.startSettingToUserInformation();
     }
+    public void llTakePhoto(){
+        mISettingView.startTakePhoto();
+    }
+    public void llSettingToNormalSetting(){
+        mISettingView.startSettingToNormalSetting();
+    }
+    public void llSetingToFeedback(){
+        mISettingView.startSettingToFeedback();
+    }
 }

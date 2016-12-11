@@ -14,12 +14,19 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="信息"
+        android:textColor="#fc6100"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/setting_shape">
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,7 +63,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:id="@+id/ll_setting_normalsetting">
 
         <TextView
             android:layout_width="wrap_content"
@@ -137,16 +145,25 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="关于"
+        android:textColor="#fc6100"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/setting_shape">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:id="@+id/ll_setting_feedback"
             >
 
             <TextView
@@ -198,26 +215,19 @@
 
 
         </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1px"
-            android:background="#000000" />
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-
-        >
+        android:layout_margin="10dp">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_outlogin"
         android:background="@drawable/outlogin_shape"
-        />
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"/>
     </LinearLayout>
 </LinearLayout>

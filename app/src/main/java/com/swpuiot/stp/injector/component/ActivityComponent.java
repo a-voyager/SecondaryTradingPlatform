@@ -7,9 +7,11 @@ import android.content.Context;
 import com.swpuiot.stp.injector.module.ActivityModule;
 import com.swpuiot.stp.injector.scrope.ActivityScope;
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
+import com.swpuiot.stp.views.FeedbackActivity;
 import com.swpuiot.stp.views.FindPasswordActivity;
 import com.swpuiot.stp.views.LoginedActivity;
 import com.swpuiot.stp.views.MainActivity;
+import com.swpuiot.stp.views.NormalSettingActivity;
 import com.swpuiot.stp.views.RegisterActivity;
 import com.swpuiot.stp.views.SettingActivity;
 import com.swpuiot.stp.views.UserInformationActivity;
@@ -30,6 +32,8 @@ public interface ActivityComponent {
     void inject(FindPasswordActivity activity);
     void inject(SettingActivity activity);
     void inject(UserInformationActivity activity);
+    void inject(NormalSettingActivity activity);
+    void inject(FeedbackActivity activity);
     Activity activity();
 
     @ContextLifeCycle("Activity")

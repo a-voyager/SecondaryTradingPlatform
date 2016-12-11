@@ -2,12 +2,9 @@ package com.swpuiot.stp.views;
 
 import android.content.Intent;
 import android.support.annotation.StringRes;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
@@ -15,7 +12,6 @@ import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
 import com.swpuiot.stp.injector.module.ActivityModule;
 import com.swpuiot.stp.interfaces.ISettingView;
-import com.swpuiot.stp.presenter.impl.RegisterPresenter;
 import com.swpuiot.stp.presenter.impl.SettingPresenter;
 import com.swpuiot.stp.utils.SnackBarUtils;
 
@@ -30,6 +26,8 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     @BindView(R.id.ll_setting)
     LinearLayout mClSetting;
     private LinearLayout settingToUserInformation;
+    private LinearLayout settingToNormalSetting;
+    private LinearLayout settingToFeedback;
     @Override
     protected void initializePresenter() {
         mSettingPresenter.attachView(this);
@@ -62,6 +60,21 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 mSettingPresenter.llSettingToUserInformationOnClick();
             }
         });
+        settingToNormalSetting= (LinearLayout) findViewById(R.id.ll_setting_normalsetting);
+        settingToNormalSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSettingPresenter.llSettingToNormalSetting();
+            }
+        });
+        settingToFeedback= (LinearLayout) findViewById(R.id.ll_setting_feedback);
+        settingToFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSettingPresenter.llSetingToFeedback();
+            }
+        });
+
     }
 
     @Override
@@ -78,6 +91,23 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     @Override
     public void startSettingToUserInformation() {
         Intent intent=new Intent(this,UserInformationActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startTakePhoto() {
+
+    }
+
+    @Override
+    public void startSettingToNormalSetting() {
+        Intent intent=new Intent(this,NormalSettingActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startSettingToFeedback() {
+        Intent intent=new Intent(this,FeedbackActivity.class);
         startActivity(intent);
     }
 }

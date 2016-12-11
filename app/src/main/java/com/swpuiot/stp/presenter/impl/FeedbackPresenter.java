@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.swpuiot.stp.base.IView;
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
-import com.swpuiot.stp.interfaces.ISettingView;
+import com.swpuiot.stp.interfaces.IFeedbackView;
 import com.swpuiot.stp.interfaces.IUserInformationView;
 import com.swpuiot.stp.presenter.IPresenter;
 
@@ -14,11 +14,11 @@ import javax.inject.Inject;
 /**
  * Created by DuZeming on 2016/12/11.
  */
-public class UserInformationPresenter implements IPresenter {
+public class FeedbackPresenter implements IPresenter {
     Context mContext;
-    IUserInformationView mIUserInformationView;
+    IFeedbackView mIFeedbackView;
     @Inject
-    public UserInformationPresenter(@ContextLifeCycle("Activity") Context context) {
+    public FeedbackPresenter(@ContextLifeCycle("Activity") Context context) {
         mContext = context;
     }
     @Override
@@ -53,6 +53,6 @@ public class UserInformationPresenter implements IPresenter {
 
     @Override
     public void attachView(IView v) {
-        mIUserInformationView = (IUserInformationView) v;
+        mIFeedbackView = (IFeedbackView) v;
     }
 }

@@ -3,8 +3,8 @@
     package="com.swpuiot.stp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.INTERNET"/>-->
 
+    <!-- <uses-permission android:name="android.permission.INTERNET"/> -->
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
@@ -45,6 +45,14 @@
         <activity
             android:name=".views.UserInformationActivity"
             android:label="@string/title_activity_user_information"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.NormalSettingActivity"
+            android:label="@string/title_activity_normal_setting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.FeedbackActivity"
+            android:label="@string/title_activity_feedback"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
