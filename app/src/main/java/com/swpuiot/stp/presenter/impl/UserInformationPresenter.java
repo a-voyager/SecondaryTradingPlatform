@@ -5,20 +5,20 @@ import android.os.Bundle;
 
 import com.swpuiot.stp.base.IView;
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
-import com.swpuiot.stp.interfaces.IMyView;
-import com.swpuiot.stp.interfaces.IRegisterView;
+import com.swpuiot.stp.interfaces.ISettingView;
+import com.swpuiot.stp.interfaces.IUserInformationView;
 import com.swpuiot.stp.presenter.IPresenter;
 
 import javax.inject.Inject;
 
 /**
- * Created by DELL on 2016/12/5.
+ * Created by DuZeming on 2016/12/11.
  */
-public class MyPresenter implements IPresenter {
+public class UserInformationPresenter implements IPresenter {
     Context mContext;
-    IMyView mIMyView;
+    IUserInformationView mIUserInformationView;
     @Inject
-    public MyPresenter(@ContextLifeCycle("Activity") Context context) {
+    public UserInformationPresenter(@ContextLifeCycle("Activity") Context context) {
         mContext = context;
     }
     @Override
@@ -53,6 +53,7 @@ public class MyPresenter implements IPresenter {
 
     @Override
     public void attachView(IView v) {
-            mIMyView = (IMyView) v;
+
+        mIUserInformationView = (IUserInformationView) v;
     }
 }

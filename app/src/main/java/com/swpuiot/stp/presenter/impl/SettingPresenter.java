@@ -54,4 +54,7 @@ public class SettingPresenter implements IPresenter {
     public void attachView(IView v) {
         mISettingView = (ISettingView) v;
     }
+    public void llSettingToUserInformationOnClick(){
+        mISettingView.startSettingToUserInformation();
+    }
 }

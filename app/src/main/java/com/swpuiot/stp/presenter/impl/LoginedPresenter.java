@@ -61,10 +61,6 @@ public class LoginedPresenter implements IPresenter {
         mILoginedView = (ILoginedView) v;
     }
 
-    public void btnLoginToMyOnClick() {
-        mILoginedView.startLoginToMyActivity();
-    }
-
     public void btnShoppingcarOnClick() {
         mILoginedView.gotoShoppingCarFragment();
     }

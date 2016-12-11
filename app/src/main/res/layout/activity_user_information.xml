@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:id="@+id/cl_my"
-    tools:context="com.swpuiot.stp.views.MyActivity">
+    android:id="@+id/cl_user_information"
+    tools:context="com.swpuiot.stp.views.UserInformationActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_my" />
+    <include layout="@layout/content_user_information" />
+
 
 
 </android.support.design.widget.CoordinatorLayout>

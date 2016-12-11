@@ -37,9 +37,8 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
 
     @BindView(R.id.cl_logined)
     CoordinatorLayout mClLogined;
-    private Button showmain;
-    private Button loginToMy;
-    private Button shoppingcar;
+    private Button btnShowMain;
+    private Button btnShoppingCar;
 
     @Override
     protected void initializePresenter() {
@@ -65,26 +64,18 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public void initViews(Bundle savedInstanceState) {
         mLoginedPresenter.onCreate(savedInstanceState);
-        showmain = (Button) findViewById(R.id.btn_main);
-        shoppingcar = (Button) findViewById(R.id.shopping_car);
+        btnShowMain = (Button) findViewById(R.id.btn_main);
+        btnShoppingCar = (Button) findViewById(R.id.shopping_car);
 
 
-        shoppingcar.setOnClickListener(new View.OnClickListener() {
+        btnShoppingCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mLoginedPresenter.btnShoppingcarOnClick();
             }
         });
 
-        loginToMy = (Button) findViewById(R.id.btn_loginToMy);
-        loginToMy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mLoginedPresenter.btnLoginToMyOnClick();
-            }
-        });
-
-        showmain.setOnClickListener(new View.OnClickListener() {
+        btnShowMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mLoginedPresenter.btnMainOnClick();
@@ -122,12 +113,8 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         return true;
     }
 
-    @Override
-    public void startLoginToMyActivity() {
-        MyFragment fragment = new MyFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
-    }
+
+
 
     @Override
     public void gotoShoppingCarFragment() {
