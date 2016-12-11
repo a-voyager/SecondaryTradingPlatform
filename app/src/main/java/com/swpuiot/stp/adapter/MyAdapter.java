@@ -1,8 +1,6 @@
 package com.swpuiot.stp.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.swpuiot.stp.AdapterItem.MyItem;
 import com.swpuiot.stp.R;
-import com.swpuiot.stp.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,7 +13,6 @@ import com.swpuiot.stp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Created by DELL on 2016/12/6.

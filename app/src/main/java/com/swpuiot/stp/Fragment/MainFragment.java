@@ -2,25 +2,19 @@ package com.swpuiot.stp.Fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.adapter.LoginedAdapter;
 import com.swpuiot.stp.adapter.MyViewPagerAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,11 +37,9 @@ public class MainFragment extends Fragment {
         mcontext = getActivity();
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         gridView = (GridView) view.findViewById(R.id.gv_logined);
-
         viewPager = (ViewPager) view.findViewById(R.id.image_slide_page);
-        mViewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
+        mViewPagerAdapter = new MyViewPagerAdapter(this.getChildFragmentManager());
         viewPager.setAdapter(mViewPagerAdapter);
-
         adapter = new LoginedAdapter(mcontext);
         gridView.setAdapter(adapter);
         return view;
