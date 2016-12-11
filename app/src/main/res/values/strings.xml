@@ -31,7 +31,14 @@
     <string name="myself">我的</string>
     <string name="weitao">微淘</string>
     <string name="main">首页</string>
-
+    <!--设置主页面中的String -->
+    <string name="ll_imformation">个人信息</string>
+    <string name="ll_nomalsetting">通用</string>
+    <string name="ll_tecent">腾讯微博</string>
+    <string name="ll_phone">手机通讯录匹配</string>
+    <string name="ll_feedback">意见反馈</string>
+    <string name="ll_aboutus">关于我们</string>
+    <string name="btn_outlogin">退出登录</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_find_password">FindPasswordActivity</string>
