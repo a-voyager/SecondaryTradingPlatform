@@ -10,4 +10,6 @@ public interface ILoginedView extends IView {
     void startLoginedMenuSetting();
 
     void showMain();
+
+    void startMyFragment();
 }

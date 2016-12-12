@@ -39,6 +39,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     CoordinatorLayout mClLogined;
     private Button btnShowMain;
     private Button btnShoppingCar;
+    private Button btn_Myself;
 
     @Override
     protected void initializePresenter() {
@@ -66,6 +67,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         mLoginedPresenter.onCreate(savedInstanceState);
         btnShowMain = (Button) findViewById(R.id.btn_main);
         btnShoppingCar = (Button) findViewById(R.id.shopping_car);
+        btn_Myself = (Button) findViewById(R.id.btn_loginToMy);
 
 
         btnShoppingCar.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +82,11 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
             public void onClick(View view) {
                 mLoginedPresenter.btnMainOnClick();
             }
+        });
+        btn_Myself.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLoginedPresenter.btnMyOnClick();}
         });
     }
 
@@ -129,6 +136,14 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
+
+    @Override
+    public void startMyFragment() {
+        MyFragment fragment = new MyFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.relativelayout1,fragment).commit();
+    }
+
     @Override
     public void startLoginedMenuSetting(){
         Intent intent=new Intent(this,SettingActivity.class);

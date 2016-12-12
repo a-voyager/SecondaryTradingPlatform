@@ -26,6 +26,7 @@
     <string name="back_and_help">退款/售后</string>
     <string name="shoppingcar">购物车</string>
     <string name="order">订单</string>
+    <string name="showmessage">点击查看信息</string>
     <!--底部导航栏的String -->
     <string name="community">社区</string>
     <string name="myself">我的</string>

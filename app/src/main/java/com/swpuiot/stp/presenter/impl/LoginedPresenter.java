@@ -72,5 +72,8 @@ public class LoginedPresenter implements IPresenter {
         mILoginedView.startLoginedMenuSetting();
     }
 
+    public void btnMyOnClick() {
+        mILoginedView.startMyFragment();
+    }
 }
 
