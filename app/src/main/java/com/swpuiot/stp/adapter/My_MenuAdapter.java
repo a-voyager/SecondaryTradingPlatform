@@ -38,7 +38,7 @@ public class My_MenuAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public My_MenuItem getItem(int i) {
         return mlist.get(i);
     }
 

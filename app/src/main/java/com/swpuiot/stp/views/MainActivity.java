@@ -153,17 +153,18 @@ public class MainActivity extends BaseActivity implements IMainView {
                     Log.d("RegisterActivity", src);
                     Log.d("RegisterActivity", "success");
                     showSnackBarMsg("登录成功");
-                    Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
 
                 @Override
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                     Log.d("RegisterActivity", "Failed");
                     Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+
                 }
             });
+            Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 

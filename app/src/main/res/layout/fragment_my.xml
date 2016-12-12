@@ -12,6 +12,7 @@
             android:layout_height="80dp"
             android:src="@drawable/ic_jike_login"/>
         <TextView
+            android:id="@+id/btn_showmyself"
             android:paddingLeft="@dimen/activity_vertical_margin"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
