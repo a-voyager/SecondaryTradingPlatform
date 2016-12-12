@@ -1,5 +1,6 @@
 package com.swpuiot.stp.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.swpuiot.stp.AdapterItem.My_MenuItem;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.adapter.My_MenuAdapter;
 import com.swpuiot.stp.views.LoginedActivity;
+import com.swpuiot.stp.views.SettingActivity;
 
 /**
  * Created by DELL on 2016/12/9.
@@ -35,13 +37,6 @@ public class MyFragment extends Fragment {
 
         adapter = new My_MenuAdapter(getActivity());
         lv_Menu.setAdapter(adapter);
-
-
-        return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
         activity = (LoginedActivity) getActivity();
         super.onCreate(savedInstanceState);
         btn_showMyself.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +49,22 @@ public class MyFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 activity.showSnackBarMsg(adapter.getItem(i).getTitle());
+                switch (i){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        Intent intent = new Intent(getActivity(), SettingActivity.class);
+                        startActivity(intent);
+                        break;
+                }
             }
         });
+
+        return view;
     }
+
+
+
 }
