@@ -19,6 +19,10 @@
             android:layout_height="match_parent"
             android:text="@string/showmessage"/>
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#000000"/>
     <ListView
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:id="@+id/lv_Myitem"

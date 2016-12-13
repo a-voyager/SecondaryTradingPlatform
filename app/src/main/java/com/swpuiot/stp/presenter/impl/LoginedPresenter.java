@@ -75,5 +75,13 @@ public class LoginedPresenter implements IPresenter {
     public void btnMyOnClick() {
         mILoginedView.startMyFragment();
     }
+
+    public void btnRecommendOnClick() {
+        mILoginedView.startRecommendFragment();
+    }
+
+    public void btnShareOnClick() {
+        mILoginedView.startShareFragment();
+    }
 }
 

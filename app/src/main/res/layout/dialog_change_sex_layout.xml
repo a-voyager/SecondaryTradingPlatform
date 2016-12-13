@@ -17,8 +17,8 @@
             android:textSize="@dimen/textsize_small" />
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/line_black"/>
+            android:layout_height="1dp"
+            android:background="#000000"/>
         <RadioButton
             android:id="@+id/rb_woman"
             android:layout_width="match_parent"

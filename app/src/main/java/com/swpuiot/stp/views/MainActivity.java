@@ -51,7 +51,6 @@ public class MainActivity extends BaseActivity implements IMainView {
     private Button btn_fingpassword;
     private EditText et_username;
     private EditText et_password;
-    private Button btn_tomy;
     private AsyncHttpClient client;
 
     @Override

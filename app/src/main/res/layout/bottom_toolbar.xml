@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4e7bdd">
+    android:background="#4e7bdd"
+    android:orientation="vertical">
 
-    <Button
-
-        android:textSize="@dimen/textsize_very_small"
-        android:id="@+id/btn_main"
-        android:layout_width="0dp"
+    <RadioGroup
+        android:id="@+id/rg_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/main" />
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/weitao"
-        android:textSize="@dimen/textsize_very_small" />
+        <RadioButton
+            android:id="@+id/rb_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            />
 
-    <Button
+        <RadioButton
+            android:id="@+id/rb_recommend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/community"
-        android:textSize="@dimen/textsize_very_small" />
+        <RadioButton
+            android:id="@+id/rb_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/shopping_car"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/shoppingcar"
-        android:textSize="@dimen/textsize_very_small" />
+        <RadioButton
+            android:id="@+id/rb_shopping_car"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btn_loginToMy"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/myself"
-        android:textSize="@dimen/textsize_very_small" />
+        <RadioButton
+            android:id="@+id/rb_myself"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </RadioGroup>
 </LinearLayout>

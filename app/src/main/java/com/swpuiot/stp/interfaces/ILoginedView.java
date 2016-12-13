@@ -12,4 +12,8 @@ public interface ILoginedView extends IView {
     void showMain();
 
     void startMyFragment();
+
+    void startRecommendFragment();
+
+    void startShareFragment();
 }
