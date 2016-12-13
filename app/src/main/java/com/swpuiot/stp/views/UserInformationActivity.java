@@ -1,19 +1,19 @@
 package com.swpuiot.stp.views;
 
-import android.app.Dialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
@@ -21,23 +21,32 @@ import com.swpuiot.stp.base.BaseApplication;
 import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
 import com.swpuiot.stp.injector.module.ActivityModule;
+import com.swpuiot.stp.interfaces.ISettingView;
 import com.swpuiot.stp.interfaces.IUserInformationView;
+import com.swpuiot.stp.presenter.impl.SettingPresenter;
 import com.swpuiot.stp.presenter.impl.UserInformationPresenter;
 import com.swpuiot.stp.utils.SnackBarUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class UserInformationActivity extends BaseActivity implements IUserInformationView {
-    private LinearLayout ll_change_nickname;
-    private TextView tv_nickname;
-    private LinearLayout ll_change_sex;
+public class UserInformationActivity extends BaseActivity implements IUserInformationView{
     @Inject
     UserInformationPresenter mUserInformationPresenter;
     @BindView(R.id.cl_user_information)
     CoordinatorLayout mClUserInformation;
-
+    private LinearLayout llAge;
+    private TextView tvAge;
+    private DatePickerDialog datePickerDialog;
+    private Calendar objTime;
+    private int iYear;
+    private int iMonth;
+    private int iDay;
     @Override
     protected void initializePresenter() {
         mUserInformationPresenter.attachView(this);
@@ -64,49 +73,19 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        tv_nickname = (TextView) findViewById(R.id.tv_nickname);
-        ll_change_nickname = (LinearLayout) findViewById(R.id.ll_change_nickname);
-        ll_change_sex = (LinearLayout) findViewById(R.id.ll_change_sex);
-
-        ll_change_nickname.setOnClickListener(new View.OnClickListener() {
+        llAge= (LinearLayout) findViewById(R.id.ll_userinformation_age);
+        tvAge= (TextView) findViewById(R.id.tv_userinformation_age);
+        llAge.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                mUserInformationPresenter.onChangeNickname();
+            public void onClick(View v) {
+                mUserInformationPresenter.llUserInformationAgeOnClick();
             }
         });
-        ll_change_sex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(UserInformationActivity.this).create();
-                View alertView = LayoutInflater.from(UserInformationActivity.this).inflate(R.layout.dialog_change_sex_layout, null);
-                alertDialog.setView(alertView);
-                alertDialog.show();
-                Window window = alertDialog.getWindow();
-                RadioGroup radioGroup = (RadioGroup) window.findViewById(R.id.rg_change_sex);
-                TextView tv_sex = (TextView) findViewById(R.id.tv_sex);
-                assert tv_sex != null;
-                if (tv_sex.getText().toString().equals("男"))
-                    radioGroup.check(R.id.rb_man);
-                if (tv_sex.getText().toString().equals("女"))
-                    radioGroup.check(R.id.rb_woman);
-                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                        showSnackBarMsg("修改成功");
-                        int RadioButtonId = radioGroup.getCheckedRadioButtonId();
-                        RadioButton radioButton = (RadioButton) window.findViewById(RadioButtonId);
-                        tv_sex.setText(radioButton.getText().toString());
-                        alertDialog.dismiss();
-                    }
-                });
-            }
-        });
-
     }
 
     @Override
     public void showSnackBarMsg(@StringRes int msg) {
-        SnackBarUtils.show(mClUserInformation, msg);
+        SnackBarUtils.show(mClUserInformation,msg);
     }
 
     @Override
@@ -114,30 +93,21 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
         SnackBarUtils.show(mClUserInformation, msg);
     }
 
+
     @Override
-    public void startDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.setTitle("修改昵称");
-        dialog.setContentView(R.layout.dialog_change_nickname_layout);
-        dialog.show();
-        Window window = dialog.getWindow();
-        Button btn_dialog_sure = (Button) window.findViewById(R.id.btn_dialog_sure);
-        btn_dialog_sure.setOnClickListener(new View.OnClickListener() {
+    public void starUserInformationAge() {
+        DatePickerDialog.OnDateSetListener DatePickerListener = new DatePickerDialog.OnDateSetListener(){
             @Override
-            public void onClick(View view) {
-                EditText et_changed_nickname = (EditText) window.findViewById(R.id.et_changed_nickname);
-                String s = et_changed_nickname.getText().toString().trim();
-                showSnackBarMsg("修改成功！");
-                tv_nickname.setText(s);
-                dialog.dismiss();
+            public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+                objTime = Calendar.getInstance();
+                iYear = objTime.get(Calendar.YEAR);
+                iMonth = objTime.get(Calendar.MONTH);
+                iDay = objTime.get(Calendar.DAY_OF_MONTH);
+                tvAge.setText(iYear-year+"");
             }
-        });
-        Button btn_dialog_cancled = (Button) window.findViewById(R.id.btn_dialog_cancled);
-        btn_dialog_cancled.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.cancel();
-            }
-        });
+        };
+        datePickerDialog= new DatePickerDialog(UserInformationActivity.this, DatePickerListener,2000,1,1);
+        datePickerDialog.setTitle("请选择出生日期");
+        datePickerDialog.show();
     }
 }

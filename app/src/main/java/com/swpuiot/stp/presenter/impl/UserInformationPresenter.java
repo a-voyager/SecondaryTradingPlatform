@@ -55,8 +55,7 @@ public class UserInformationPresenter implements IPresenter {
     public void attachView(IView v) {
         mIUserInformationView = (IUserInformationView) v;
     }
-
-    public void onChangeNickname() {
-        mIUserInformationView.startDialog();
+    public void llUserInformationAgeOnClick(){
+        mIUserInformationView.starUserInformationAge();
     }
 }

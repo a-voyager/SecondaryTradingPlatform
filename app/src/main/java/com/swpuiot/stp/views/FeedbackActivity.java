@@ -85,8 +85,7 @@ public class FeedbackActivity extends BaseActivity implements IFeedbackView {
         dialog.setPositiveButton("返回", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent=new Intent(FeedbackActivity.this,SettingActivity.class);
-                startActivity(intent);
+                dialog.dismiss();
                 finish();
             }
         });
