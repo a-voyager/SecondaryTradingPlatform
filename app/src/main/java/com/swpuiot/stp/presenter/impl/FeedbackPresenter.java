@@ -55,4 +55,7 @@ public class FeedbackPresenter implements IPresenter {
     public void attachView(IView v) {
         mIFeedbackView = (IFeedbackView) v;
     }
+    public  void btnSuccessFeedbackOnClick(){
+        mIFeedbackView.startSuccessFeedback();
+    }
 }
