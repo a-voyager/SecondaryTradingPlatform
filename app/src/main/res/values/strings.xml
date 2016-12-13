@@ -4,7 +4,7 @@
     <!-- 主界面的String -->
     <string name="et_login">用户名</string>
     <string name="et_password">密码</string>
-    <string name="btn_login">登陆</string>
+    <string name="btn_login">登录</string>
     <string name="btn_register">注册</string>
     <!-- 活动名称 -->
     <string name="title_activity_logined">LoginedActivity</string>
