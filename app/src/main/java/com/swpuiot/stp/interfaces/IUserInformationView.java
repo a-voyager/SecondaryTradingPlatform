@@ -5,4 +5,8 @@ package com.swpuiot.stp.interfaces;
  */
 public interface IUserInformationView {
     void starUserInformationAge();
+
+    void changeUserSex();
+
+    void changeUserNickname();
 }

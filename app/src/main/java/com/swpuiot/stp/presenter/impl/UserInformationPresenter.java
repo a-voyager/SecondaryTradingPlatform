@@ -17,10 +17,12 @@ import javax.inject.Inject;
 public class UserInformationPresenter implements IPresenter {
     Context mContext;
     IUserInformationView mIUserInformationView;
+
     @Inject
     public UserInformationPresenter(@ContextLifeCycle("Activity") Context context) {
         mContext = context;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -55,7 +57,16 @@ public class UserInformationPresenter implements IPresenter {
     public void attachView(IView v) {
         mIUserInformationView = (IUserInformationView) v;
     }
-    public void llUserInformationAgeOnClick(){
+
+    public void llUserInformationAgeOnClick() {
         mIUserInformationView.starUserInformationAge();
+    }
+
+    public void lluserInformationSexOnClick() {
+        mIUserInformationView.changeUserSex();
+    }
+
+    public void llUserInformationNickNameOnClick() {
+        mIUserInformationView.changeUserNickname();
     }
 }
