@@ -103,7 +103,21 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
                 iYear = objTime.get(Calendar.YEAR);
                 iMonth = objTime.get(Calendar.MONTH);
                 iDay = objTime.get(Calendar.DAY_OF_MONTH);
-                tvAge.setText(iYear-year+"");
+                if(iMonth>monthOfYear){
+                    tvAge.setText(iYear-year+"");
+                }
+                else if(iMonth<monthOfYear){
+                    tvAge.setText(iYear-year-1+"");
+                }
+                else{
+                    if (iDay>=dayOfMonth){
+                        tvAge.setText(iYear-year+"");
+                    }
+                    else {
+                        tvAge.setText(iYear-year-1+"");
+                    }
+                }
+
             }
         };
         datePickerDialog= new DatePickerDialog(UserInformationActivity.this, DatePickerListener,2000,1,1);
