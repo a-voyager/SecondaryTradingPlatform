@@ -48,6 +48,9 @@
     <string name="findpassword_title">找回密码</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!--dialog中的String-->
+    <string name="sure">确认</string>
+    <string name="cancled">取消</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
