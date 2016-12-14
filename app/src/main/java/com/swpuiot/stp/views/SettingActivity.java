@@ -5,9 +5,11 @@ import android.support.annotation.StringRes;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
+import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
 import com.swpuiot.stp.injector.module.ActivityModule;
@@ -28,6 +30,8 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     private LinearLayout settingToUserInformation;
     private LinearLayout settingToNormalSetting;
     private LinearLayout settingToFeedback;
+//    private ResponseEntity responseEntity;
+
     @Override
     protected void initializePresenter() {
         mSettingPresenter.attachView(this);
@@ -53,21 +57,23 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        settingToUserInformation= (LinearLayout) findViewById(R.id.ll_setting_userinformation);
+//        ResponseEntity responseEntity = MainActivity.getResponseEntity();
+//        responseEntity = (ResponseEntity) getIntent().getSerializableExtra("userinformation");
+        settingToUserInformation = (LinearLayout) findViewById(R.id.ll_setting_userinformation);
         settingToUserInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSettingPresenter.llSettingToUserInformationOnClick();
             }
         });
-        settingToNormalSetting= (LinearLayout) findViewById(R.id.ll_setting_normalsetting);
+        settingToNormalSetting = (LinearLayout) findViewById(R.id.ll_setting_normalsetting);
         settingToNormalSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSettingPresenter.llSettingToNormalSetting();
             }
         });
-        settingToFeedback= (LinearLayout) findViewById(R.id.ll_setting_feedback);
+        settingToFeedback = (LinearLayout) findViewById(R.id.ll_setting_feedback);
         settingToFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +96,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @Override
     public void startSettingToUserInformation() {
-        Intent intent=new Intent(this,UserInformationActivity.class);
+        Intent intent = new Intent(this, UserInformationActivity.class);
         startActivity(intent);
     }
 
@@ -101,13 +107,13 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @Override
     public void startSettingToNormalSetting() {
-        Intent intent=new Intent(this,NormalSettingActivity.class);
+        Intent intent = new Intent(this, NormalSettingActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void startSettingToFeedback() {
-        Intent intent=new Intent(this,FeedbackActivity.class);
+        Intent intent = new Intent(this, FeedbackActivity.class);
         startActivity(intent);
     }
 }

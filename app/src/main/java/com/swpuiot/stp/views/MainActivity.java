@@ -1,5 +1,6 @@
 package com.swpuiot.stp.views;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
@@ -20,6 +21,7 @@ import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
 import com.swpuiot.stp.entities.LoginEntity;
 import com.swpuiot.stp.entities.RegisterEntity;
+import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
 import com.swpuiot.stp.injector.module.ActivityModule;
@@ -38,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements IMainView {
 
@@ -52,6 +55,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private EditText et_username;
     private EditText et_password;
     private AsyncHttpClient client;
+    private static ResponseEntity responseEntity;
 
     @Override
     public int getLayoutResID() {
@@ -129,42 +133,83 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void startLoginedActivity() {
-        if (et_username.getText().toString().isEmpty() || et_password.getText().toString().isEmpty()) {
-            showSnackBarMsg("账号密码不能为空");
-        } else {
-            LoginEntity entity = new LoginEntity("login", et_username.getText().toString().trim(), et_password.getText().toString());
-            String json = GsonUtils.toJson(entity);
-            ByteArrayEntity arrayEntity = null;
-            try {
-                arrayEntity = new ByteArrayEntity(json.getBytes("UTF-8"));
-                arrayEntity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+        if (confirminform()) {
+            btn_login.setEnabled(false);
+            ByteArrayEntity arrayEntity = initEntity();
+            httpPostRequest(arrayEntity);
+            showProgressDialog();
+        }
+    }
+
+    private void showProgressDialog() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("正在登录，请稍后...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+
+    //以下是各种方法,上方是主要逻辑
+
+    public static ResponseEntity getResponseEntity() {
+        return responseEntity;
+    }
+
+    private void httpPostRequest(ByteArrayEntity arrayEntity) {
+        client.post(this, "http://www.deardull.com/BookStore/appuser", arrayEntity, "application/json", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                String src = new String(bytes);
+                responseEntity = GsonUtils.fromJson(src, ResponseEntity.class);
+                Log.d("MainActivity", responseEntity.toString());
+                if (Integer.parseInt(responseEntity.getState()) == 0) {
+                    if (responseEntity.getMsg().equals("用户未激活")) {
+                        Log.d("MainActivity", "用户未激活");
+                        showSnackBarMsg("用户未激活");
+                    } else
+                        Log.d("MainActivity", "用户名或密码不正确");
+                    showSnackBarMsg("用户名或密码不正确");
+                }
+                Log.d("MainActivity", src);
+                Log.d("MainActivity", "success");
+                showSnackBarMsg("登录成功");
+                Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
+                intent.putExtra("userinformation", responseEntity);
+                startActivity(intent);
+                finish();
             }
 
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                Log.d("RegisterActivity", "Failed");
+                Toast.makeText(MainActivity.this, "网络不太顺畅", Toast.LENGTH_SHORT).show();
+                btn_login.setEnabled(true);
+            }
+        });
+    }
 
-            client.post(this, "http://www.deardull.com/BookStore/appuser", arrayEntity, "application/json", new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                    String src = new String(bytes);
-                    LoginEntity loginEntity = GsonUtils.fromJson(src, LoginEntity.class);
-
-                    Log.d("RegisterActivity", src);
-                    Log.d("RegisterActivity", "success");
-                    showSnackBarMsg("登录成功");
-                }
-
-                @Override
-                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                    Log.d("RegisterActivity", "Failed");
-                    Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-            Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
-            startActivity(intent);
-            finish();
+    private ByteArrayEntity initEntity() {
+        LoginEntity entity = new LoginEntity("login", et_username.getText().toString().trim(), et_password.getText().toString());
+        String json = GsonUtils.toJson(entity);
+        ByteArrayEntity arrayEntity = null;
+        try {
+            arrayEntity = new ByteArrayEntity(json.getBytes("UTF-8"));
+//                arrayEntity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
+        return arrayEntity;
+    }
+
+    public boolean confirminform() {
+        if (et_username.getText().toString().isEmpty()) {
+            showSnackBarMsg("账号不能为空");
+            return false;
+        } else if (et_password.getText().toString().isEmpty()) {
+            showSnackBarMsg("密码不能为空");
+            return false;
+        } else
+            return true;
     }
 
     @Override
@@ -178,4 +223,5 @@ public class MainActivity extends BaseActivity implements IMainView {
         Intent intent = new Intent(this, FindPasswordActivity.class);
         startActivity(intent);
     }
+
 }

@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
+import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
 import com.swpuiot.stp.injector.module.ActivityModule;
@@ -86,12 +87,15 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        ResponseEntity responseEntity = MainActivity.getResponseEntity();
         llAge = (LinearLayout) findViewById(R.id.ll_userinformation_age);
         tv_nickname = (TextView) findViewById(R.id.tv_nickname);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
         llchangenickname = (LinearLayout) findViewById(R.id.ll_change_nickname);
         llchangesex = (LinearLayout) findViewById(R.id.ll_change_sex);
         tvAge = (TextView) findViewById(R.id.tv_userinformation_age);
+
+        tv_nickname.setText(responseEntity.getNickname());
         llAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

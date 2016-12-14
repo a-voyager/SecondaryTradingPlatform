@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.swpuiot.stp.AdapterItem.My_MenuItem;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.adapter.My_MenuAdapter;
+import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.views.LoginedActivity;
 import com.swpuiot.stp.views.SettingActivity;
 
@@ -27,15 +28,17 @@ public class MyFragment extends Fragment {
     private My_MenuAdapter adapter;
     private TextView btn_showMyself;
     private LoginedActivity activity;
+//    private ResponseEntity mresponseEntity;
     private static MyFragment mMyFragment=null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, null);
+
         lv_Menu = (ListView) view.findViewById(R.id.lv_Myitem);
         btn_showMyself = (TextView) view.findViewById(R.id.btn_showmyself);
-
+//        mresponseEntity = (ResponseEntity) getActivity().getIntent().getSerializableExtra("userinformation");
         adapter = new My_MenuAdapter(getActivity());
         lv_Menu.setAdapter(adapter);
         activity = (LoginedActivity) getActivity();
@@ -57,6 +60,7 @@ public class MyFragment extends Fragment {
                         break;
                     case 2:
                         Intent intent = new Intent(getActivity(), SettingActivity.class);
+//                        intent.putExtra("userinformation",mresponseEntity);
                         startActivity(intent);
                         break;
                 }

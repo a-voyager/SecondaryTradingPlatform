@@ -23,6 +23,7 @@ import com.swpuiot.stp.Fragment.ShoppingFragment;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
+import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
 import com.swpuiot.stp.injector.module.ActivityModule;
@@ -43,6 +44,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     CoordinatorLayout mClLogined;
     private FragmentManager fragmentManager;
     private RadioGroup radioGroup;
+//    private ResponseEntity responseEntity;
 
     @Override
     protected void initializePresenter() {
@@ -68,6 +70,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public void initViews(Bundle savedInstanceState) {
         mLoginedPresenter.onCreate(savedInstanceState);
+//        responseEntity = (ResponseEntity) getIntent().getSerializableExtra("userinformation");
         fragmentManager = getSupportFragmentManager();
         showMain();
         radioGroup = (RadioGroup) findViewById(R.id.rg_toolbar);
