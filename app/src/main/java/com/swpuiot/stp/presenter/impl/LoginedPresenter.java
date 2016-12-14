@@ -28,7 +28,7 @@ public class LoginedPresenter implements IPresenter {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         mILoginedView.showSnackBarMsg("登录成功");
-        mILoginedView.showMain();
+
     }
 
     @Override

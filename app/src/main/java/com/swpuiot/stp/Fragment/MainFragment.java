@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,26 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
+    public static String TAG = "Main_Fragment";
     private GridView gridView;
     private LoginedAdapter adapter;
     private Context mcontext;
     private ViewPager viewPager;
     private MyViewPagerAdapter mViewPagerAdapter;
+    private static MainFragment mMainFragment = null;
 
-    public MainFragment() {
-        // Required empty public constructor
+    private MainFragment() {
+    }
+
+    public static MainFragment newInstance() {
+        if (mMainFragment == null) {
+            Bundle args = new Bundle();
+
+            mMainFragment = new MainFragment();
+            mMainFragment.setArguments(args);
+            Log.d("MainFragment", "new");
+        }
+        return mMainFragment;
     }
 
     @Override

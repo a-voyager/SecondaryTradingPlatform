@@ -27,6 +27,7 @@ public class MyFragment extends Fragment {
     private My_MenuAdapter adapter;
     private TextView btn_showMyself;
     private LoginedActivity activity;
+    private static MyFragment mMyFragment=null;
 
     @Nullable
     @Override
@@ -49,7 +50,7 @@ public class MyFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 activity.showSnackBarMsg(adapter.getItem(i).getTitle());
-                switch (i){
+                switch (i) {
                     case 0:
                         break;
                     case 1:
@@ -65,6 +66,20 @@ public class MyFragment extends Fragment {
         return view;
     }
 
+    private MyFragment() {
+    }
+
+    ;
+
+    public static MyFragment newInstance() {
+        if (mMyFragment == null) {
+            Bundle args = new Bundle();
+
+             mMyFragment = new MyFragment();
+            mMyFragment.setArguments(args);
+        }
+        return mMyFragment;
+    }
 
 
 }

@@ -18,18 +18,21 @@ public class ShoppingFragment extends Fragment {
     private ShoppingCarAdapter adapter;
     private Activity activity;
     private Context context;
+    private static ShoppingFragment mShoppingFragment=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         activity = getActivity();
-        context =  activity;
-        // Inflate the layout for this fragment
+        context = activity;
         View view = inflater.inflate(R.layout.fragment_shooping, container, false);
         listView = (ListView) view.findViewById(R.id.lv_shopping);
         adapter = new ShoppingCarAdapter(context);
         listView.setAdapter(adapter);
         return view;
+    }
+
+    private ShoppingFragment() {
     }
 
     @Override
@@ -42,5 +45,15 @@ public class ShoppingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    public static ShoppingFragment newInstance() {
+
+        if (mShoppingFragment == null) {
+            Bundle args = new Bundle();
+             mShoppingFragment = new ShoppingFragment();
+            mShoppingFragment.setArguments(args);
+        }
+        return mShoppingFragment;
     }
 }

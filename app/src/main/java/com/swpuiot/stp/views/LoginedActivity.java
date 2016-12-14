@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,9 +41,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
 
     @BindView(R.id.cl_logined)
     CoordinatorLayout mClLogined;
-    private Button btnShowMain;
-    private Button btnShoppingCar;
-    private Button btn_Myself;
+    private FragmentManager fragmentManager;
     private RadioGroup radioGroup;
 
     @Override
@@ -69,6 +68,8 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public void initViews(Bundle savedInstanceState) {
         mLoginedPresenter.onCreate(savedInstanceState);
+        fragmentManager = getSupportFragmentManager();
+        showMain();
         radioGroup = (RadioGroup) findViewById(R.id.rg_toolbar);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -119,7 +120,6 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         switch (item.getItemId()) {
             case R.id.action_setting:
                 mLoginedPresenter.itemLoginedSetting();
-
         }
         return true;
     }
@@ -127,43 +127,37 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
 
     @Override
     public void gotoShoppingCarFragment() {
-        ShoppingFragment fragment = new ShoppingFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        ShoppingFragment fragment = ShoppingFragment.newInstance();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
     public void showMain() {
-        MainFragment fragment = new MainFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        MainFragment fragment = MainFragment.newInstance();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
     public void startMyFragment() {
-        MyFragment fragment = new MyFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        MyFragment fragment = MyFragment.newInstance();
         fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
     public void startRecommendFragment() {
-        RecommendFragment fragment = new RecommendFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativelayout1,fragment).commit();
+        RecommendFragment fragment = RecommendFragment.newInstance();
+        fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
     public void startShareFragment() {
-        ShareFragment fragment = new ShareFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativelayout1,fragment).commit();
+        ShareFragment fragment = ShareFragment.newInstance();
+        fragmentManager.beginTransaction().replace(R.id.relativelayout1, fragment).commit();
     }
 
     @Override
     public void startLoginedMenuSetting() {
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
-
     }
 }
