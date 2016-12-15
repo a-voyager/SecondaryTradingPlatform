@@ -69,4 +69,7 @@ public class UserInformationPresenter implements IPresenter {
     public void llUserInformationNickNameOnClick() {
         mIUserInformationView.changeUserNickname();
     }
+    public void llUserInformationImageOnclick(){
+        mIUserInformationView.changeUserImage();
+    }
 }

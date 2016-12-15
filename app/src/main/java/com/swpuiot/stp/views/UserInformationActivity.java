@@ -1,8 +1,20 @@
 package com.swpuiot.stp.views;
 
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +28,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -34,6 +47,9 @@ import com.swpuiot.stp.presenter.impl.SettingPresenter;
 import com.swpuiot.stp.presenter.impl.UserInformationPresenter;
 import com.swpuiot.stp.utils.SnackBarUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,10 +64,14 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
     UserInformationPresenter mUserInformationPresenter;
     @BindView(R.id.cl_user_information)
     CoordinatorLayout mClUserInformation;
+    public static final int TAKE_PHOTO=1;
+    public static final int CROP_PHOTO=2;
+    private static final int CHOSE_PHOTO=3;
     private LinearLayout llAge;
     private TextView tvAge;
     private LinearLayout llchangesex;
     private LinearLayout llchangenickname;
+    private LinearLayout llChangeImage;
     private DatePickerDialog datePickerDialog;
     private Calendar objTime;
     private TextView tv_sex;
@@ -60,7 +80,8 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
     private int iDay;
     private TextView tv_nickname_error;
     private TextView tv_nickname;
-
+    private ImageView userImage;
+    private Uri imageUri;
     @Override
     protected void initializePresenter() {
         mUserInformationPresenter.attachView(this);
@@ -94,8 +115,9 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
         llchangenickname = (LinearLayout) findViewById(R.id.ll_change_nickname);
         llchangesex = (LinearLayout) findViewById(R.id.ll_change_sex);
         tvAge = (TextView) findViewById(R.id.tv_userinformation_age);
-
+        llChangeImage= (LinearLayout) findViewById(R.id.ll_change_image);
         tv_nickname.setText(responseEntity.getNickname());
+        userImage = (ImageView) findViewById(R.id.iv_user_image);
         llAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +134,12 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
             @Override
             public void onClick(View view) {
                 mUserInformationPresenter.lluserInformationSexOnClick();
+            }
+        });
+        llChangeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mUserInformationPresenter.llUserInformationImageOnclick();
             }
         });
     }
@@ -213,4 +241,124 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
             }
         });
     }
+
+    @Override
+    public void changeUserImage() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(UserInformationActivity.this);
+        dialog.setTitle("头像");
+        dialog.setMessage("头像来源");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("相册", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                File outputImage = new File(Environment.getExternalStorageDirectory(), "output_image.jpg");
+                try {
+                    if (outputImage.exists()) {
+                        outputImage.delete();
+                    }
+                    outputImage.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                imageUri = Uri.fromFile(outputImage);
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, TAKE_PHOTO);
+            }
+        });
+        dialog.setNegativeButton("拍照", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent=new Intent("android.intent.action.GET_CONTENT");
+                intent.setType("image/*");
+                startActivityForResult(intent,CHOSE_PHOTO);
+            }
+        });
+        dialog.show();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case TAKE_PHOTO:
+                if(resultCode==RESULT_OK){
+                    Intent intent=new Intent("com.android.camera.action.CROP");
+                    intent.setDataAndType(imageUri,"image/*");
+                    intent.putExtra("scale", true);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                    startActivityForResult(intent, CROP_PHOTO);
+                }
+                break;
+            case CROP_PHOTO:
+                if(resultCode==RESULT_OK){
+                    try{
+                        Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        userImage.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                break;
+            case CHOSE_PHOTO:
+                if(resultCode==RESULT_OK){
+                    if(Build.VERSION.SDK_INT>=19){
+                        handleImageOnKitKat(data);
+                    }
+                    else{
+                        handleImageBeforeKItKat(data);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @TargetApi(19)
+    private void handleImageOnKitKat(Intent data) {
+        String imagePath=null;
+        Uri uri=data.getData();
+        if(DocumentsContract.isDocumentUri(this, uri)){
+            String docId=DocumentsContract.getDocumentId(uri);
+            if("com.android.providers.media.documents".equals(uri.getAuthority())){
+                String id=docId.split(":")[1];
+                String selection=MediaStore.Images.Media._ID+"="+id;
+                imagePath=getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,selection);
+            }
+            else if("com.android.providers.downloads.documents".equals(uri.getAuthority())){
+                Uri contentUri= ContentUris.withAppendedId(Uri.parse("content://downlads/public_downloads"), Long.valueOf(docId));
+                imagePath=getImagePath(contentUri,null);
+            }
+        }
+        else if("content".equalsIgnoreCase(uri.getScheme())){
+            imagePath=getImagePath(uri,null);
+        }
+        displayImage(imagePath);
+    }
+    private void handleImageBeforeKItKat(Intent data) {
+        Uri uri=data.getData();
+        String imagePath=getImagePath(uri, null);
+        displayImage(imagePath);
+    }
+    private String getImagePath(Uri uri,String selection) {
+        String path=null;
+        Cursor cursor=getContentResolver().query(uri, null, selection, null, null);
+        if(cursor!=null) {
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+            }
+            cursor.close();
+        }
+        return path;
+    }
+    private void displayImage(String imagePath) {
+        if(imagePath!=null){
+            Bitmap bitmap=BitmapFactory.decodeFile(imagePath);
+            userImage.setImageBitmap(bitmap);
+        }
+        else {
+            Toast.makeText(this,"得不到图片",Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

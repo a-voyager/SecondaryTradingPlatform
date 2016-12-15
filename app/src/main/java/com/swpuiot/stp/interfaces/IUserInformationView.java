@@ -9,4 +9,6 @@ public interface IUserInformationView {
     void changeUserSex();
 
     void changeUserNickname();
+
+    void changeUserImage();
 }

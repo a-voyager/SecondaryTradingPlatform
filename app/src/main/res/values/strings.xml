@@ -36,7 +36,7 @@
     <string name="ll_information">个人信息</string>
     <string name="ll_nomalsetting">通用</string>
     <string name="ll_tecent">腾讯微博</string>
-    <string name="ll_phone">手机通讯录匹配</string>
+    <string name="ll_phone">手机号码匹配</string>
     <string name="ll_feedback">意见反馈</string>
     <string name="ll_aboutus">关于我们</string>
     <string name="btn_outlogin">退出</string>
