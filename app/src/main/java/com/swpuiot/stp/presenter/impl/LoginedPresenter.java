@@ -2,6 +2,7 @@ package com.swpuiot.stp.presenter.impl;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.swpuiot.stp.base.IView;
 
@@ -17,7 +18,7 @@ import javax.inject.Inject;
 public class LoginedPresenter implements IPresenter {
     public static final String TAG = "LoginedActivity";
     private Context mContext;
-    private  ILoginedView mILoginedView;
+    private ILoginedView mILoginedView;
 
     @Inject
     public LoginedPresenter(@ContextLifeCycle("Activity") Context context) {
@@ -65,10 +66,11 @@ public class LoginedPresenter implements IPresenter {
         mILoginedView.gotoShoppingCarFragment();
     }
 
-    public void btnMainOnClick(){
+    public void btnMainOnClick() {
         mILoginedView.showMain();
     }
-    public  void itemLoginedSetting(){
+
+    public void itemLoginedSetting() {
         mILoginedView.startLoginedMenuSetting();
     }
 

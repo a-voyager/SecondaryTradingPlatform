@@ -9,20 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.swpuiot.stp.R;
+import com.swpuiot.stp.views.LoginedActivity;
 
 /**
  * Created by DELL on 2016/12/13.
  */
 public class RecommendFragment extends Fragment {
-    private static RecommendFragment mrecommendfragment=null;
+    private static RecommendFragment mrecommendfragment = null;
     private Toolbar toolbar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recommend, container, false);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_loginedin);
-        toolbar.setTitle("推荐");
+        LoginedActivity.toolbar.setTitle("推荐");
         return view;
     }
 
@@ -33,7 +33,7 @@ public class RecommendFragment extends Fragment {
 
         if (mrecommendfragment == null) {
             Bundle args = new Bundle();
-             mrecommendfragment = new RecommendFragment();
+            mrecommendfragment = new RecommendFragment();
             mrecommendfragment.setArguments(args);
         }
         return mrecommendfragment;

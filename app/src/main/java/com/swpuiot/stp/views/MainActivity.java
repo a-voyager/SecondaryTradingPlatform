@@ -73,8 +73,8 @@ public class MainActivity extends BaseActivity implements IMainView {
         et_password = (EditText) findViewById(R.id.et_password);
         et_username = (EditText) findViewById(R.id.et_username);
         client = new AsyncHttpClient();
-        toolbar = (Toolbar) findViewById(R.id.toolbar_loginedin);
-
+//        toolbar = (Toolbar) findViewById(R.id.toolbar_loginedin);
+        // FIXME: 2016/12/15
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

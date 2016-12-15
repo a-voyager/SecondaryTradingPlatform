@@ -29,9 +29,9 @@ public class MyFragment extends Fragment {
     private My_MenuAdapter adapter;
     private TextView btn_showMyself;
     private LoginedActivity activity;
-    private Toolbar toolbar;
+    //    private Toolbar toolbar;
 //    private ResponseEntity mresponseEntity;
-    private static MyFragment mMyFragment=null;
+    private static MyFragment mMyFragment = null;
 
     @Nullable
     @Override
@@ -40,8 +40,11 @@ public class MyFragment extends Fragment {
 
         lv_Menu = (ListView) view.findViewById(R.id.lv_Myitem);
         btn_showMyself = (TextView) view.findViewById(R.id.btn_showmyself);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_loginedin);
-        toolbar.setTitle("我的");
+//        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_loginedin);
+//        LoginedActivity.Mytoolbar.setVisibility(View.VISIBLE);
+//        LoginedActivity.Mytoolbar.setTitle("我的");
+
+        LoginedActivity.toolbar.setTitle("我的");
 //        mresponseEntity = (ResponseEntity) getActivity().getIntent().getSerializableExtra("userinformation");
         adapter = new My_MenuAdapter(getActivity());
         lv_Menu.setAdapter(adapter);
@@ -83,7 +86,7 @@ public class MyFragment extends Fragment {
         if (mMyFragment == null) {
             Bundle args = new Bundle();
 
-             mMyFragment = new MyFragment();
+            mMyFragment = new MyFragment();
             mMyFragment.setArguments(args);
         }
         return mMyFragment;
