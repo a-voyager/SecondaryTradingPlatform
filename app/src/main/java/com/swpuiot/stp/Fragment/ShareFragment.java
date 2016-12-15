@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.swpuiot.stp.R;
+import com.swpuiot.stp.views.LoginedActivity;
 
 /**
  * Created by DELL on 2016/12/13.
@@ -21,8 +22,7 @@ public class ShareFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_loginedin);
-        toolbar.setTitle("分享");
+        LoginedActivity.toolbar.setTitle("分享");
         View view = inflater.inflate(R.layout.fragment_share, container, false);
         return view;
     }

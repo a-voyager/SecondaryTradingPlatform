@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.adapter.ShoppingCarAdapter;
+import com.swpuiot.stp.views.LoginedActivity;
 
 public class ShoppingFragment extends Fragment {
 
@@ -20,7 +21,7 @@ public class ShoppingFragment extends Fragment {
     private Activity activity;
     private Context context;
     private Toolbar toolbar;
-    private static ShoppingFragment mShoppingFragment=null;
+    private static ShoppingFragment mShoppingFragment = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,8 +29,7 @@ public class ShoppingFragment extends Fragment {
         activity = getActivity();
         context = activity;
         View view = inflater.inflate(R.layout.fragment_shooping, container, false);
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_loginedin);
-        toolbar.setTitle("购物车");
+        LoginedActivity.toolbar.setTitle("购物车");
         listView = (ListView) view.findViewById(R.id.lv_shopping);
         adapter = new ShoppingCarAdapter(context);
         listView.setAdapter(adapter);
@@ -55,7 +55,7 @@ public class ShoppingFragment extends Fragment {
 
         if (mShoppingFragment == null) {
             Bundle args = new Bundle();
-             mShoppingFragment = new ShoppingFragment();
+            mShoppingFragment = new ShoppingFragment();
             mShoppingFragment.setArguments(args);
         }
         return mShoppingFragment;

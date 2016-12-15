@@ -55,8 +55,7 @@ public class MainFragment extends Fragment {
         gridView = (GridView) view.findViewById(R.id.gv_logined);
         viewPager = (ViewPager) view.findViewById(R.id.image_slide_page);
 //        toolbar = (LoginedActivity)getActivity()
-        toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar_loginedin);
-        toolbar.setTitle("首页");
+        LoginedActivity.toolbar.setTitle("主页");
         mViewPagerAdapter = new MyViewPagerAdapter(this.getChildFragmentManager());
         viewPager.setAdapter(mViewPagerAdapter);
         adapter = new LoginedAdapter(getActivity());

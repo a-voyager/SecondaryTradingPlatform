@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,8 +45,8 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     CoordinatorLayout mClLogined;
     private FragmentManager fragmentManager;
     private RadioGroup radioGroup;
-//    private ResponseEntity responseEntity;
-
+    public static Toolbar toolbar;
+    public static Toolbar Mytoolbar;
     @Override
     protected void initializePresenter() {
         mLoginedPresenter.attachView(this);
@@ -70,8 +71,10 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     @Override
     public void initViews(Bundle savedInstanceState) {
         mLoginedPresenter.onCreate(savedInstanceState);
-//        responseEntity = (ResponseEntity) getIntent().getSerializableExtra("userinformation");
         fragmentManager = getSupportFragmentManager();
+//        Mytoolbar = (Toolbar) findViewById(R.id.toolbar_logininmy);
+//        Mytoolbar.setVisibility(View.INVISIBLE);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_loginedin);
         showMain();
         radioGroup = (RadioGroup) findViewById(R.id.rg_toolbar);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
