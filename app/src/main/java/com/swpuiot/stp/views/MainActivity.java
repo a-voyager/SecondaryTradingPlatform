@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private EditText et_password;
     private AsyncHttpClient client;
     private static ResponseEntity responseEntity;
+    private ProgressDialog progressDialog;
 
     @Override
     public int getLayoutResID() {
@@ -142,7 +143,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     private void showProgressDialog() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在登录，请稍后...");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -183,6 +184,7 @@ public class MainActivity extends BaseActivity implements IMainView {
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 Log.d("RegisterActivity", "Failed");
                 Toast.makeText(MainActivity.this, "网络不太顺畅", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
                 btn_login.setEnabled(true);
             }
         });
