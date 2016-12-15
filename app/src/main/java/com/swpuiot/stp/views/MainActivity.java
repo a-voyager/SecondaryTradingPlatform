@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,6 +58,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private AsyncHttpClient client;
     private static ResponseEntity responseEntity;
     private ProgressDialog progressDialog;
+    public static Toolbar toolbar;
 
     @Override
     public int getLayoutResID() {
@@ -71,6 +73,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         et_password = (EditText) findViewById(R.id.et_password);
         et_username = (EditText) findViewById(R.id.et_username);
         client = new AsyncHttpClient();
+        toolbar = (Toolbar) findViewById(R.id.toolbar_loginedin);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,13 +127,6 @@ public class MainActivity extends BaseActivity implements IMainView {
         mMainPresenter.attachView(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
 
     @Override
     public void startLoginedActivity() {
@@ -175,8 +171,9 @@ public class MainActivity extends BaseActivity implements IMainView {
                 Log.d("MainActivity", "success");
                 showSnackBarMsg("登录成功");
                 Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
-                intent.putExtra("userinformation", responseEntity);
+//                intent.putExtra("userinformation", responseEntity);
                 startActivity(intent);
+                progressDialog.dismiss();
                 finish();
             }
 
@@ -186,6 +183,9 @@ public class MainActivity extends BaseActivity implements IMainView {
                 Toast.makeText(MainActivity.this, "网络不太顺畅", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 btn_login.setEnabled(true);
+                Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
