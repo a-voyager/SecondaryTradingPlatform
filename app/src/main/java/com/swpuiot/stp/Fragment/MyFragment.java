@@ -18,6 +18,7 @@ import com.swpuiot.stp.AdapterItem.My_MenuItem;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.adapter.My_MenuAdapter;
 import com.swpuiot.stp.entities.ResponseEntity;
+import com.swpuiot.stp.views.AddGoodsActivity;
 import com.swpuiot.stp.views.LoginedActivity;
 import com.swpuiot.stp.views.SettingActivity;
 
@@ -70,6 +71,9 @@ public class MyFragment extends Fragment {
 //                        intent.putExtra("userinformation",mresponseEntity);
                         startActivity(intent);
                         break;
+                    case 3:
+                        Intent intent1 = new Intent(getActivity(), AddGoodsActivity.class);
+                        startActivity(intent1);
                 }
             }
         });

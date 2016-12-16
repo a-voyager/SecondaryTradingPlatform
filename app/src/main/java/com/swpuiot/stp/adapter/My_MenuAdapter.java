@@ -24,6 +24,7 @@ public class My_MenuAdapter extends BaseAdapter {
         mlist.add(new My_MenuItem("我的收藏",R.drawable.ic_my_likes));
         mlist.add(new My_MenuItem("我的消息",R.drawable.ic_notification_read));
         mlist.add(new My_MenuItem("设置",R.drawable.ic_settings_black_24dp));
+        mlist.add(new My_MenuItem("发布商品信息",R.drawable.goods));
     }
 
     private Context mContext;

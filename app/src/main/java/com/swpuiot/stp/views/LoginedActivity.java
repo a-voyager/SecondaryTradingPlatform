@@ -75,6 +75,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
 //        Mytoolbar = (Toolbar) findViewById(R.id.toolbar_logininmy);
 //        Mytoolbar.setVisibility(View.INVISIBLE);
         toolbar = (Toolbar) findViewById(R.id.toolbar_loginedin);
+        setSupportActionBar(toolbar);
         showMain();
         radioGroup = (RadioGroup) findViewById(R.id.rg_toolbar);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

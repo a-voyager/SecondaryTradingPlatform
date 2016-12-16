@@ -19,12 +19,14 @@
                 android:focusable="true" />
 
             <GridView
+                android:layout_marginTop="10dp"
                 android:id="@+id/gv_logined"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:columnWidth="@dimen/columnWidth"
+                android:verticalSpacing="2dp"
                 android:horizontalSpacing="@dimen/horizontalSpacing"
-                android:numColumns="auto_fit"
+                android:numColumns="4"
                 android:stretchMode="columnWidth">
 
             </GridView>

@@ -247,8 +247,7 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
         AlertDialog.Builder dialog=new AlertDialog.Builder(UserInformationActivity.this);
         dialog.setTitle("头像");
         dialog.setMessage("头像来源");
-        dialog.setCancelable(false);
-        dialog.setPositiveButton("相册", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("拍照", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 File outputImage = new File(Environment.getExternalStorageDirectory(), "output_image.jpg");
@@ -266,7 +265,7 @@ public class UserInformationActivity extends BaseActivity implements IUserInform
                 startActivityForResult(intent, TAKE_PHOTO);
             }
         });
-        dialog.setNegativeButton("拍照", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("相册", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent=new Intent("android.intent.action.GET_CONTENT");
