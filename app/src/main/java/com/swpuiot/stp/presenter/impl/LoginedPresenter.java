@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.swpuiot.stp.base.IView;
 
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
@@ -28,6 +29,7 @@ public class LoginedPresenter implements IPresenter {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Fresco.initialize(mContext);
         mILoginedView.showSnackBarMsg("登录成功");
 
     }

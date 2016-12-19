@@ -8,6 +8,8 @@
 
 
     <com.swpuiot.stp.base.MyListView
+        tools:listheader="@layout/listview_mainfragment_head"
+        tools:listitem="@layout/listview_mainfragment_item"
         android:id="@+id/lv_showgoods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
