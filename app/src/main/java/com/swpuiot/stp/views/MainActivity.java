@@ -15,11 +15,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.swpuiot.stp.Fragment.MainFragment;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
+import com.swpuiot.stp.entities.GoodsEntity;
 import com.swpuiot.stp.entities.LoginEntity;
 import com.swpuiot.stp.entities.RegisterEntity;
 import com.swpuiot.stp.entities.ResponseEntity;
@@ -37,6 +42,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -59,6 +66,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     private static ResponseEntity responseEntity;
     private ProgressDialog progressDialog;
     public static Toolbar toolbar;
+    private  static ArrayList<GoodsEntity> goodsArray;
+
 
     @Override
     public int getLayoutResID() {
@@ -135,6 +144,7 @@ public class MainActivity extends BaseActivity implements IMainView {
             ByteArrayEntity arrayEntity = initEntity();
             httpPostRequest(arrayEntity);
             showProgressDialog();
+            getGoods();
         }
     }
 
@@ -224,6 +234,46 @@ public class MainActivity extends BaseActivity implements IMainView {
     public void startFindPasswordActicity() {
         Intent intent = new Intent(this, FindPasswordActivity.class);
         startActivity(intent);
+    }
+    public void getGoods() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(this, "http://www.deardull.com/BookStore/product?method=findAll", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+//                GoodsListEntiey goodsListEntiey = new GoodsListEntiey();
+
+//                GoodsEntity goodsEntity = new GoodsEntity();
+                String s = new String(bytes);
+                Gson gson = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement el = parser.parse(s);
+                JsonArray jsonArray = null;
+                if(el.isJsonArray()){
+                    jsonArray = el.getAsJsonArray();
+                }
+                goodsArray = new ArrayList<>();
+                Iterator it = jsonArray.iterator();
+                while (it.hasNext()){
+                    JsonElement e = (JsonElement) it.next();
+                    goodsArray.add(gson.fromJson(e,GoodsEntity.class));
+                }
+//                goodsListEntiey = GsonUtils.fromJson(s,GoodsListEntiey.class);
+                Log.e("GoodsEntity",goodsArray.toString());
+
+                Log.d("GoodsEntity",s);
+//                goodsEntity = GsonUtils.fromJson(s, GoodsEntity.class);
+//                Log.e("GoodsEntity", "success");
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                Log.e("GoodsEntity", "failed");
+            }
+        });
+    }
+
+    public static ArrayList<GoodsEntity> getGoodsArray(){
+        return goodsArray;
     }
 
 }
