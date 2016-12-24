@@ -24,6 +24,7 @@ import com.swpuiot.stp.Fragment.ShoppingFragment;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
+import com.swpuiot.stp.entities.GoodsEntity;
 import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.injector.component.ActivityComponent;
 import com.swpuiot.stp.injector.component.DaggerActivityComponent;
@@ -31,6 +32,8 @@ import com.swpuiot.stp.injector.module.ActivityModule;
 import com.swpuiot.stp.interfaces.ILoginedView;
 import com.swpuiot.stp.presenter.impl.LoginedPresenter;
 import com.swpuiot.stp.utils.SnackBarUtils;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -46,7 +49,8 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     private FragmentManager fragmentManager;
     private RadioGroup radioGroup;
     public static Toolbar toolbar;
-    public static Toolbar Mytoolbar;
+//    public static Toolbar Mytoolbar;
+    public static ArrayList<GoodsEntity> goodsEntityList;
     @Override
     protected void initializePresenter() {
         mLoginedPresenter.attachView(this);
@@ -72,6 +76,7 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     public void initViews(Bundle savedInstanceState) {
         mLoginedPresenter.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
+        goodsEntityList = new ArrayList<>();
 //        Mytoolbar = (Toolbar) findViewById(R.id.toolbar_logininmy);
 //        Mytoolbar.setVisibility(View.INVISIBLE);
         toolbar = (Toolbar) findViewById(R.id.toolbar_loginedin);
@@ -167,4 +172,6 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
+
+
 }

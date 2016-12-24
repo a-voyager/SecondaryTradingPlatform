@@ -142,9 +142,10 @@ public class MainActivity extends BaseActivity implements IMainView {
         if (confirminform()) {
             btn_login.setEnabled(false);
             ByteArrayEntity arrayEntity = initEntity();
+            getGoods();
             httpPostRequest(arrayEntity);
             showProgressDialog();
-            getGoods();
+
         }
     }
 

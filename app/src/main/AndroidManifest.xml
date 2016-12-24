@@ -53,7 +53,17 @@
         <activity
             android:name=".views.AddGoodsActivity"
             android:label="@string/title_activity_add_goods"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.GoodsDescriptionActivity"
+            android:label="@string/title_activity_goods_description"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".localbroadcast.ShoppingBroadcast" >
+            <intent-filter>
+                <action android:name="com.swpu.addtoshoppingcar"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

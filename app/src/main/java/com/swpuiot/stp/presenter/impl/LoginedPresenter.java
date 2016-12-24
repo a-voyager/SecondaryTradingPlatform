@@ -24,7 +24,6 @@ public class LoginedPresenter implements IPresenter {
     @Inject
     public LoginedPresenter(@ContextLifeCycle("Activity") Context context) {
         mContext = context;
-
     }
 
     @Override

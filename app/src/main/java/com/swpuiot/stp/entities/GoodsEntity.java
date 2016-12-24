@@ -1,9 +1,11 @@
 package com.swpuiot.stp.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by DELL on 2016/12/19.
  */
-public class GoodsEntity {
+public class GoodsEntity implements Serializable{
     private String id; // 商品编号
     private String name; // 名称
     private double price; // 价格

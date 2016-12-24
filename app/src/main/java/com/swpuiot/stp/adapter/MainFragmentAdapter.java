@@ -29,11 +29,10 @@ public class MainFragmentAdapter extends BaseAdapter {
         mContext = context;
         layoutInflater = LayoutInflater.from(mContext);
         mgoodsEntities = MainActivity.getGoodsArray();
-        if (mgoodsEntities == null) {
-            mgoodsEntities = new ArrayList<>();
-            GoodsEntity entity = new GoodsEntity();
-            entity.setName("暂时没有商品");
-            mgoodsEntities.add(entity);
+        if (mgoodsEntities.size()==0){
+            GoodsEntity goodsEntity = new GoodsEntity();
+            goodsEntity.setName("暂时没有商品");
+            mgoodsEntities.add(goodsEntity);
         }
     }
 
@@ -65,6 +64,9 @@ public class MainFragmentAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.textView.setText(mgoodsEntities.get(i).getName());
+        if (mgoodsEntities.get(i).getImgurl()==null){
+            viewHolder.simpleDraweeView.setVisibility(View.INVISIBLE);
+        }
         Uri uri = Uri.parse("http://www.deardull.com/BookStore" + mgoodsEntities.get(i).getImgurl());
         viewHolder.simpleDraweeView.setImageURI(uri);
         return view;

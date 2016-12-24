@@ -1,7 +1,9 @@
 package com.swpuiot.stp.Fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -20,14 +24,15 @@ import com.google.gson.JsonParser;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.swpuiot.stp.R;
-import com.swpuiot.stp.adapter.LoginedAdapter;
 import com.swpuiot.stp.adapter.MainFragmentAdapter;
 import com.swpuiot.stp.adapter.MyViewPagerAdapter;
 import com.swpuiot.stp.base.MyListView;
 import com.swpuiot.stp.entities.GoodsEntity;
 //import com.swpuiot.stp.entities.GoodsListEntiey;
 import com.swpuiot.stp.utils.GsonUtils;
+import com.swpuiot.stp.views.GoodsDescriptionActivity;
 import com.swpuiot.stp.views.LoginedActivity;
+import com.swpuiot.stp.views.MainActivity;
 
 import org.apache.http.Header;
 
@@ -38,7 +43,7 @@ import java.util.Iterator;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
-    public static String TAG = "Main_Fragment";
+    public static String GoodsInfo = "Main_Fragment";
     private GridView gridView;
     private MainFragmentAdapter adapter;
     //    private LoginedAdapter adapter;
@@ -79,6 +84,17 @@ public class MainFragment extends Fragment {
 //        viewPager = (ViewPager) view.findViewById(R.id.image_slide_page);
 //        toolbar = (LoginedActivity)getActivity()
         LoginedActivity.toolbar.setTitle("主页");
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public  void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), i+"", Toast.LENGTH_SHORT).show();
+                Log.e("MainFragment","OnitemClick");
+                Intent intent = new Intent(getActivity(), GoodsDescriptionActivity.class);
+                intent.putExtra(GoodsInfo, MainActivity.getGoodsArray().get(i-1));
+                startActivity(intent);
+//                startActivityForResult(intent,1);
+            }
+        });
 //        mViewPagerAdapter = new MyViewPagerAdapter(this.getChildFragmentManager());
 //        viewPager.setAdapter(mViewPagerAdapter);
 //        adapter = new LoginedAdapter(getActivity());
@@ -118,7 +134,10 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-
-
-
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.e("MainFragment", "attach");
+        Log.e("MainFragment", mMainFragment + "");
+    }
 }

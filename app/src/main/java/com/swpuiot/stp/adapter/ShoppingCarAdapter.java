@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.swpuiot.stp.AdapterItem.ShoppingItem;
 import com.swpuiot.stp.R;
+import com.swpuiot.stp.entities.GoodsEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +22,21 @@ import java.util.List;
 public class ShoppingCarAdapter extends BaseAdapter {
 
     private Context mcontext;
-    private ImageView imageView;
+    private SimpleDraweeView simpleDraweeView;
+    //    private ImageView imageView;
     private TextView textView;
     LayoutInflater layoutInflater;
-    List<ShoppingItem> list = new ArrayList<>();
+    List<GoodsEntity> list = new ArrayList<>();
 
-    {
-        list.add(new ShoppingItem(R.drawable.huangyueying, "Android第一行代码"));
-        list.add(new ShoppingItem(R.drawable.zhugeliang,"Android权威编程指南"));
-        list.add(new ShoppingItem(R.drawable.ic_jike_login,"JAVA编程思想"));
-    }
+//    {
+//        list.add(new ShoppingItem(R.drawable.huangyueying, "Android第一行代码"));
+//        list.add(new ShoppingItem(R.drawable.zhugeliang, "Android权威编程指南"));
+//        list.add(new ShoppingItem(R.drawable.ic_jike_login, "JAVA编程思想"));
+//    }
 
-    public ShoppingCarAdapter(Context context) {
+    public ShoppingCarAdapter(Context context, List<GoodsEntity> goodsEntityList) {
         mcontext = context;
+        list = goodsEntityList;
         layoutInflater = LayoutInflater.from(mcontext);
     }
 
@@ -53,11 +57,13 @@ public class ShoppingCarAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = layoutInflater.inflate(R.layout.listview_shoppingcaritem,viewGroup,false);
-        imageView = (ImageView) view.findViewById(R.id.goods_img);
+        view = layoutInflater.inflate(R.layout.listview_shoppingcaritem, viewGroup, false);
+        simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.goods_img);
+        simpleDraweeView.setImageURI("http://www.deardull.com/BookStore"+list.get(i).getImgurl());
+//        imageView = (ImageView) view.findViewById(R.id.goods_img);
         textView = (TextView) view.findViewById(R.id.goods_name);
-        imageView.setImageResource(list.get(i).getImgId());
-        textView.setText(list.get(i).getShopname());
+//        imageView.setImageResource(list.get(i).getImgId());
+        textView.setText(list.get(i).getName());
         return view;
     }
 }

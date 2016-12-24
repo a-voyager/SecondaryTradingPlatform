@@ -112,4 +112,5 @@
     <string name="title_activity_normal_setting">NormalSettingActivity</string>
     <string name="title_activity_feedback">FeedbackActivity</string>
     <string name="title_activity_add_goods">AddGoodsActivity</string>
+    <string name="title_activity_goods_description">GoodsDescription</string>
 </resources>
