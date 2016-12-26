@@ -244,7 +244,9 @@ public class MainActivity extends BaseActivity implements IMainView {
 //                GoodsListEntiey goodsListEntiey = new GoodsListEntiey();
 
 //                GoodsEntity goodsEntity = new GoodsEntity();
+
                 String s = new String(bytes);
+//                Log.e("MainActivity",s);
                 Gson gson = new Gson();
                 JsonParser parser = new JsonParser();
                 JsonElement el = parser.parse(s);
@@ -259,9 +261,9 @@ public class MainActivity extends BaseActivity implements IMainView {
                     goodsArray.add(gson.fromJson(e,GoodsEntity.class));
                 }
 //                goodsListEntiey = GsonUtils.fromJson(s,GoodsListEntiey.class);
-                Log.e("GoodsEntity",goodsArray.toString());
 
-                Log.d("GoodsEntity",s);
+//                Log.e("GoodsEntity",goodsArray.toString());
+//                Log.d("GoodsEntity",s);
 //                goodsEntity = GsonUtils.fromJson(s, GoodsEntity.class);
 //                Log.e("GoodsEntity", "success");
             }

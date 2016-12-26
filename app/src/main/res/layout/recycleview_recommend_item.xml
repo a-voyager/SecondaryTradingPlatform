@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:freco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="18dp"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_recommend_name"
@@ -10,4 +14,10 @@
         android:layout_height="20dp"
         android:gravity="center"
         tools:text="test" />
+
+    <TextView
+        android:id="@+id/tv__recommend_goodsdescription"
+        android:maxLines="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

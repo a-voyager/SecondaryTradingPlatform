@@ -3,13 +3,28 @@ package com.swpuiot.stp.presenter.impl;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.swpuiot.stp.base.IView;
 
+import com.swpuiot.stp.entities.FindGoodsEntity;
+import com.swpuiot.stp.entities.GoodsEntity;
 import com.swpuiot.stp.injector.scrope.ContextLifeCycle;
 import com.swpuiot.stp.interfaces.ILoginedView;
 import com.swpuiot.stp.presenter.IPresenter;
+
+import org.apache.http.Header;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 

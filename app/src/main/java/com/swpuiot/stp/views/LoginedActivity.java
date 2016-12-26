@@ -16,6 +16,12 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.swpuiot.stp.Fragment.MainFragment;
 import com.swpuiot.stp.Fragment.MyFragment;
 import com.swpuiot.stp.Fragment.RecommendFragment;
@@ -24,6 +30,7 @@ import com.swpuiot.stp.Fragment.ShoppingFragment;
 import com.swpuiot.stp.R;
 import com.swpuiot.stp.base.BaseActivity;
 import com.swpuiot.stp.base.BaseApplication;
+import com.swpuiot.stp.entities.FindGoodsEntity;
 import com.swpuiot.stp.entities.GoodsEntity;
 import com.swpuiot.stp.entities.ResponseEntity;
 import com.swpuiot.stp.injector.component.ActivityComponent;
@@ -33,7 +40,10 @@ import com.swpuiot.stp.interfaces.ILoginedView;
 import com.swpuiot.stp.presenter.impl.LoginedPresenter;
 import com.swpuiot.stp.utils.SnackBarUtils;
 
+import org.apache.http.Header;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -49,7 +59,9 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
     private FragmentManager fragmentManager;
     private RadioGroup radioGroup;
     public static Toolbar toolbar;
-//    public static Toolbar Mytoolbar;
+    public static ArrayList<FindGoodsEntity> findGoodsEntities;
+
+    //    public static Toolbar Mytoolbar;
     public static ArrayList<GoodsEntity> goodsEntityList;
     @Override
     protected void initializePresenter() {
@@ -103,6 +115,34 @@ public class LoginedActivity extends BaseActivity implements ILoginedView {
                         mLoginedPresenter.btnMyOnClick();
                         break;
                 }
+            }
+        });
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(this, "http://www.deardull.com/BookStore/pur?method=find12", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                String s = new String(bytes);
+
+                Gson gson = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement el = parser.parse(s);
+                JsonArray jsonArray = null;
+                if (el.isJsonArray()) {
+                    jsonArray = el.getAsJsonArray();
+                }
+                findGoodsEntities = new ArrayList<>();
+                Iterator it = jsonArray.iterator();
+                while (it.hasNext()) {
+                    JsonElement e = (JsonElement) it.next();
+                    findGoodsEntities.add(gson.fromJson(e, FindGoodsEntity.class));
+                }
+                Log.e("LoginedPresenter",findGoodsEntities.toString());
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                Log.e("LogintedPresenter","error");
             }
         });
     }
