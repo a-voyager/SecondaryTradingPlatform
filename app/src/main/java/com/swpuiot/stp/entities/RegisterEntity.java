@@ -18,16 +18,26 @@ public class RegisterEntity {
     private String password;
     private String nickname;
     private String email;
+    private String code;
 
     public RegisterEntity() {
     }
 
-    public RegisterEntity(String method, String username, String password, String nickname, String email) {
+    public RegisterEntity(String method, String username, String password, String nickname, String email,String code) {
         this.method = method;
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getMethod() {

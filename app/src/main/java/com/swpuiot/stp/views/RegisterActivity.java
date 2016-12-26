@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -67,6 +68,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     private TextView emptyNickname;
     private TextView emptyEmail;
     private AsyncHttpClient client;
+    private SimpleDraweeView simpleDraweeView;
+    private EditText surecode;
 
     @Override
     protected void initializePresenter() {
@@ -103,6 +106,11 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         emptyPassword = (TextView) findViewById(R.id.tv_emptypassword);
         emptyNickname = (TextView) findViewById(R.id.tv_emptynickname);
         emptyEmail = (TextView) findViewById(R.id.tv_emptyeamil);
+        surecode = (EditText) findViewById(R.id.et_register_checkcode);
+        simpleDraweeView = (SimpleDraweeView) findViewById(R.id.sdv_register_sucecode);
+
+
+        simpleDraweeView.setImageURI("http://www.deardull.com/BookStore/checkcode");
         client = new AsyncHttpClient();
         btnRegisterToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,12 +167,19 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
             emptyEmail.setText("*邮箱不能为空");
             return;
         }
-
+        if (surecode.getText().toString().isEmpty()) {
+            showSnackBarMsg("验证码不能为空");
+            return;
+        }
 
         if (!register_username.getText().toString().isEmpty() && !register_password.getText().toString().isEmpty() && !register_sure.getText().toString().isEmpty() && register_password.getText().toString().equals(register_sure.getText().toString()) && !register_nickname.getText().toString().isEmpty() && !register_email.getText().toString().isEmpty()) {
 
-            RegisterEntity entity = new RegisterEntity("regist", register_username.getText().toString().trim(), register_password.getText().toString(),
-                    register_nickname.getText().toString(), register_email.getText().toString());
+            RegisterEntity entity = new RegisterEntity("regist",
+                    register_username.getText().toString().trim(),
+                    register_password.getText().toString(),
+                    register_nickname.getText().toString(),
+                    register_email.getText().toString(),
+                    surecode.getText().toString());
             String json = GsonUtils.toJson(entity);
             ByteArrayEntity arrayEntity = null;
             try {
